@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -66,12 +67,7 @@ public class ActivityA extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        registerReceiver(receiver, new IntentFilter("dk.lalan.backgroundapp_group_5"));
-    }
-
-    @Override
-    public void onPause(){
-        unregisterReceiver(receiver);
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("dk.lalan.backgroundapp_group_5"));
     }
 
     @Override
