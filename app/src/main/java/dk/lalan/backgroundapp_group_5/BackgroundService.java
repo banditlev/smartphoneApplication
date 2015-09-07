@@ -25,6 +25,9 @@ public class BackgroundService extends IntentService {
         }
         Intent activityB = new Intent(getApplicationContext(), ActivityB.class);
         activityB.putExtra("message", message);
+        activityB.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(activityB);
     }
+
+
 }

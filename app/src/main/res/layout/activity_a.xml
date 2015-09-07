@@ -15,7 +15,8 @@
         android:layout_alignRight="@+id/editTextDelay"
         android:layout_alignEnd="@+id/editTextDelay"
         android:layout_alignLeft="@+id/editTextDelay"
-        android:layout_alignStart="@+id/editTextDelay" />
+        android:layout_alignStart="@+id/editTextDelay"
+        android:singleLine="true"/>
 
     <EditText
         android:layout_width="wrap_content"

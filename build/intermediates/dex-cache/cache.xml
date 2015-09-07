@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/lalan/Developer/Git/smartphoneApplication/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
-        <dex dex="/Users/lalan/Developer/Git/smartphoneApplication/app/build/intermediates/pre-dexed/debug/classes-3d7620ced70e58f26b24b8e458fe8b3afe88f868.jar" />
-    </item>
-    <item
-        jar="/Users/lalan/Developer/Git/smartphoneApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="4fcf0b1879f8caf497c073e1432d398e9e2988c1">
-        <dex dex="/Users/lalan/Developer/Git/smartphoneApplication/app/build/intermediates/pre-dexed/debug/classes-847b472400ba424ef71cab7351cef03bcea9e985.jar" />
-    </item>
-    <item
-        jar="/Users/lalan/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
-        <dex dex="/Users/lalan/Developer/Git/smartphoneApplication/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-69587ff900956a5faa04410b60c3580e8f739f07.jar" />
-    </item>
-    <item
-        jar="/Users/lalan/Developer/Git/smartphoneApplication/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/libs/internal_impl-23.0.0.jar"
+        jar="/Users/banditlev/Developer/smartphoneApplication/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/libs/internal_impl-23.0.0.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
-        <dex dex="/Users/lalan/Developer/Git/smartphoneApplication/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-02e4af8b71a9d2cdcd092dc3fe264ad5286b2662.jar" />
+        <dex dex="/Users/banditlev/Developer/smartphoneApplication/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-ba29a4550307fd53fdd437f88e724a90460d39a4.jar" />
+    </item>
+    <item
+        jar="/Users/banditlev/Developer/smartphoneApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="4fcf0b1879f8caf497c073e1432d398e9e2988c1">
+        <dex dex="/Users/banditlev/Developer/smartphoneApplication/app/build/intermediates/pre-dexed/debug/classes-fe0b614a51b022e67b8afbe2650f95e0fe2f21e6.jar" />
+    </item>
+    <item
+        jar="/Users/banditlev/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
+        <dex dex="/Users/banditlev/Developer/smartphoneApplication/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-1f08e9ad099068b1ae949dbd9e5d4b8aed2e2b54.jar" />
+    </item>
+    <item
+        jar="/Users/banditlev/Developer/smartphoneApplication/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
+        <dex dex="/Users/banditlev/Developer/smartphoneApplication/app/build/intermediates/pre-dexed/debug/classes-70cce185f33bd73649630b4d428540828371dc4e.jar" />
     </item>
 
 </items>
