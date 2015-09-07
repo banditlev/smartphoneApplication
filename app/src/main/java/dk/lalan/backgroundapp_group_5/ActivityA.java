@@ -1,6 +1,9 @@
 package dk.lalan.backgroundapp_group_5;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,11 +11,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ActivityA extends AppCompatActivity {
 
     private EditText messageEditText, delayEditText;
     private Button goButton;
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        //Inspiration: http://www.vogella.com/tutorials/AndroidServices/article.html
+        @Override
+        public void onReceive(Context context, Intent intent){
+            Bundle bundle = intent.getExtras();
+            if(bundle != null){
+                int timeleft = bundle.getInt("timeleft");
+                Toast.makeText(ActivityA.this, "Timeleft: " + timeleft, Toast.LENGTH_SHORT);
+            }
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +54,8 @@ public class ActivityA extends AppCompatActivity {
                 startService(bgService);
             }
         });
+
+        registerReceiver(receiver, new IntentFilter("dk.lalan.backgroundap_group_5"));
     }
 
     @Override
@@ -59,4 +79,5 @@ public class ActivityA extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

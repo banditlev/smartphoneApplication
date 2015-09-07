@@ -16,13 +16,22 @@ public class BackgroundService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         String message = intent.getStringExtra("message");
-        int delay = Integer.valueOf(intent.getStringExtra("delay"))*1000;
+        int delay = Integer.valueOf(intent.getStringExtra("delay"));
+        Intent broadcastIntent;
 
-        try {
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-            Log.e("Error", "*** ThreadFEJL!!! ");;
+        for (int i = delay; i > 0; i--){
+
+            broadcastIntent = new Intent("dk.lalan.backgroundapp_group_5");
+            broadcastIntent.putExtra("timeleft", i);
+            sendBroadcast(broadcastIntent);
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Log.e("Error", "*** ThreadFEJL!!! ");;
+            }
         }
+
         Intent activityB = new Intent(getApplicationContext(), ActivityB.class);
         activityB.putExtra("message", message);
         activityB.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
