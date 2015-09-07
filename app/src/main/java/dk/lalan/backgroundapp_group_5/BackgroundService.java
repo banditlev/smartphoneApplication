@@ -16,5 +16,7 @@ public class BackgroundService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String message = intent.getStringExtra("message");
         int delay = new Integer(intent.getStringExtra("delay"));
+
+        
     }
 }
