@@ -23,7 +23,7 @@ public class BackgroundService extends IntentService {
         for (int i = delay; i > 0; i--){
 
             broadcastIntent = new Intent("dk.lalan.backgroundapp_group_5");
-            broadcastIntent.putExtra("timeleft", i);
+            broadcastIntent.putExtra("timeleft", Integer.toString(i));
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(broadcastIntent);
 
             try {
