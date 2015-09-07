@@ -22,8 +22,12 @@ public class ActivityA extends AppCompatActivity {
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                messageEditText = (EditText) findViewById(R.id.editTextMessage);
+                delayEditText = (EditText) findViewById(R.id.editTextDelay);
+
                 String message = messageEditText.getText().toString();
-                int delay = new Integer(delayEditText.getText().toString());
+                String delay = delayEditText.getText().toString();
 
                 Intent bgService = new Intent(getApplicationContext(), BackgroundService.class);
                 bgService.putExtra("message", message);
