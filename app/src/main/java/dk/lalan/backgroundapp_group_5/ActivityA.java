@@ -54,8 +54,6 @@ public class ActivityA extends AppCompatActivity {
                 startService(bgService);
             }
         });
-
-        registerReceiver(receiver, new IntentFilter("dk.lalan.backgroundap_group_5"));
     }
 
     @Override
@@ -63,6 +61,17 @@ public class ActivityA extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_a, menu);
         return true;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        registerReceiver(receiver, new IntentFilter("dk.lalan.backgroundapp_group_5"));
+    }
+
+    @Override
+    public void onPause(){
+        unregisterReceiver(receiver);
     }
 
     @Override
