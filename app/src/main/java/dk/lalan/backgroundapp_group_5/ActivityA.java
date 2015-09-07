@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,12 +45,13 @@ public class ActivityA extends AppCompatActivity {
 
                 String message = messageEditText.getText().toString();
                 String delay = delayEditText.getText().toString();
-
-                Intent bgService = new Intent(getApplicationContext(), BackgroundService.class);
-                bgService.putExtra("message", message);
-                bgService.putExtra("delay", delay);
-
-                startService(bgService);
+                if(checkInputField()) {
+                    Intent bgService = new Intent(getApplicationContext(), BackgroundService.class);
+                    bgService.putExtra("message", message);
+                    bgService.putExtra("delay", delay);
+                    Log.d("***", "Starting service with delay: " + delay + "s");
+                    startService(bgService);
+                }
             }
         });
     }
@@ -82,4 +84,13 @@ public class ActivityA extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public boolean checkInputField(){
+        EditText delayEditText = (EditText) findViewById(R.id.editTextDelay);
+        int delayValue = Integer.parseInt(delayEditText.getText().toString());
+        if(delayValue >= 5 && delayValue <= 60){
+            return true;
+        }
+        Toast.makeText(ActivityA.this, "Delay needs to be between 5 & 60", Toast.LENGTH_LONG).show();
+        return false;
+    }
 }

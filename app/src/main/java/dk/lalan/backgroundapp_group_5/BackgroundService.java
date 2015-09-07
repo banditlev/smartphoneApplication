@@ -28,15 +28,17 @@ public class BackgroundService extends IntentService {
 
             try {
                 Thread.sleep(1000);
+                Log.d("***", "Waited for " + (delay-i+1) + "s");
             } catch (InterruptedException e) {
-                Log.e("Error", "*** ThreadFEJL!!! ");;
+                Log.e("***", "*** ThreadFEJL!!! ");;
             }
         }
-
+        Log.d("***", "Service finished");
         Intent activityB = new Intent(getApplicationContext(), ActivityB.class);
         activityB.putExtra("message", message);
         activityB.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(activityB);
+        stopSelf();
     }
 
 
