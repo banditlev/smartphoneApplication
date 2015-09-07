@@ -23,11 +23,8 @@ public class ActivityA extends AppCompatActivity {
         //Inspiration: http://www.vogella.com/tutorials/AndroidServices/article.html
         @Override
         public void onReceive(Context context, Intent intent){
-            Bundle bundle = intent.getExtras();
-            if(bundle != null){
-                int timeleft = bundle.getInt("timeleft");
-                Toast.makeText(ActivityA.this, "Timeleft: " + timeleft, Toast.LENGTH_SHORT);
-            }
+            String timeleft = intent.getStringExtra("timeleft");
+            Toast.makeText(ActivityA.this, "Timeleft: " + timeleft, Toast.LENGTH_SHORT).show();
         }
     };
 

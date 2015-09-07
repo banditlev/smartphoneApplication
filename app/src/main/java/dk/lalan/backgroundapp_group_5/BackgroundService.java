@@ -2,6 +2,7 @@ package dk.lalan.backgroundapp_group_5;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 /**
@@ -23,7 +24,7 @@ public class BackgroundService extends IntentService {
 
             broadcastIntent = new Intent("dk.lalan.backgroundapp_group_5");
             broadcastIntent.putExtra("timeleft", i);
-            sendBroadcast(broadcastIntent);
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(broadcastIntent);
 
             try {
                 Thread.sleep(1000);
