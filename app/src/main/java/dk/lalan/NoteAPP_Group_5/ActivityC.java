@@ -1,4 +1,4 @@
-package dk.lalan.NoteAPP_Group_5;
+package dk.lalan.noteapp_group_5;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,16 +1,52 @@
-package dk.lalan.NoteAPP_Group_5;
+package dk.lalan.noteapp_group_5;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class ActivityA extends AppCompatActivity {
-
+    private Button newTextNoteBtn, saveTextNoteBtn, showTextnotesBtn;
+    private String textnote;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a);
+
+        Intent i = getIntent();
+        textnote = i.getStringExtra("textnote");
+
+        newTextNoteBtn = (Button) findViewById(R.id.buttonActivityANewTextnote);
+        saveTextNoteBtn = (Button) findViewById(R.id.buttonActivityASaveTextnote);
+        showTextnotesBtn = (Button) findViewById(R.id.buttonActivityAShowTextnotes);
+
+        newTextNoteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ActivityB.class);
+                startActivity(intent);
+            }
+        });
+
+        saveTextNoteBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), textnote, Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        showTextnotesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ActivityC.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -1,16 +1,44 @@
-package dk.lalan.NoteAPP_Group_5;
+package dk.lalan.noteapp_group_5;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class ActivityB extends AppCompatActivity {
+
+    private Button submiteTextnoteBtn, cancelBtn;
+    private EditText textnoteEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_b);
+
+        submiteTextnoteBtn = (Button) findViewById(R.id.buttonActivityBSubmitTextnote);
+        cancelBtn = (Button) findViewById(R.id.buttonActivityBCancel);
+        textnoteEditText = (EditText) findViewById(R.id.editTextActivityBTextnote);
+
+        submiteTextnoteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ActivityA.class);
+                intent.putExtra("textnote", textnoteEditText.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ActivityA.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

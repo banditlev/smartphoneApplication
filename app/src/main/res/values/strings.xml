@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">NoteAPP_Group_5</string>
-    <string name="title_activity_">ActivityA</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
