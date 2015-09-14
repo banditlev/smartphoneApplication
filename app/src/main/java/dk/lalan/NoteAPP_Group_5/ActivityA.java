@@ -9,9 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import dk.lalan.NoteAPP_Group_5.Database;
+
 public class ActivityA extends AppCompatActivity {
     private Button newTextNoteBtn, saveTextNoteBtn, showTextnotesBtn;
     private String textnote;
+    private Database db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +39,11 @@ public class ActivityA extends AppCompatActivity {
         saveTextNoteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), textnote, Toast.LENGTH_LONG).show();
+                db = new Database(getApplicationContext());
+                if(textnote != null) {
+                    db.addNote(textnote);
+                }
+                Toast.makeText(getApplicationContext(), "Note added to DB", Toast.LENGTH_LONG).show();
             }
         });
 
