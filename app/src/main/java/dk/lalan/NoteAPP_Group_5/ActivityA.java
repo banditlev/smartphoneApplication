@@ -3,13 +3,12 @@ package dk.lalan.noteapp_group_5;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import dk.lalan.NoteAPP_Group_5.Database;
 
 public class ActivityA extends AppCompatActivity {
     private Button newTextNoteBtn, saveTextNoteBtn, showTextnotesBtn;
@@ -18,6 +17,9 @@ public class ActivityA extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //db = new Database(getApplicationContext());
+        //db.clearDB();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a);
 
@@ -51,8 +53,10 @@ public class ActivityA extends AppCompatActivity {
         showTextnotesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ActivityC.class);
-                startActivity(intent);
+                db = new Database(getApplicationContext());
+                Log.e("***", db.getAllNotes().toString());
+                //Intent intent = new Intent(getApplicationContext(), ActivityC.class);
+                //startActivity(intent);
             }
         });
     }

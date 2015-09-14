@@ -1,4 +1,4 @@
-package dk.lalan.NoteAPP_Group_5;
+package dk.lalan.noteapp_group_5;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -32,7 +32,11 @@ public class Database {
     }
 
     public long addNote(String note){
-
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Date date = new Date();
 
         ContentValues values = new ContentValues();
@@ -40,13 +44,18 @@ public class Database {
         values.put(dbHelper.NOTE_TIME, date.toString());
 
         long insertId = db.insert(dbHelper.TABLE_NOTES, null, values);
-
+        close();
         return insertId;
     }
 
     public List<String> getAllNotes(){
         List<String> notes = new ArrayList<String>();
 
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Cursor cursor = db.query(dbHelper.TABLE_NOTES, null, null, null, null, null, null); //Velkommen til null helvedet!
 
         while (cursor.moveToNext()) {
@@ -55,7 +64,20 @@ public class Database {
         }
 
         cursor.close();
+        close();
         return notes;
+    }
+
+    public void clearDB(){
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        db.delete(dbHelper.TABLE_NOTES, null, null);
+
+        close();
     }
 
     static class DatabaseHelper extends SQLiteOpenHelper {
