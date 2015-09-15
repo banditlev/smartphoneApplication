@@ -48,8 +48,8 @@ public class Database {
         return insertId;
     }
 
-    public List<String> getAllNotes(){
-        List<String> notes = new ArrayList<String>();
+    public ArrayList<String> getAllNotes(){
+        ArrayList<String> notes = new ArrayList<String>();
 
         try {
             open();

@@ -17,7 +17,7 @@ public class ActivityA extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //db = new Database(getApplicationContext());
+        db = new Database(getApplicationContext());
         //db.clearDB();
 
         super.onCreate(savedInstanceState);
@@ -55,8 +55,8 @@ public class ActivityA extends AppCompatActivity {
             public void onClick(View v) {
                 db = new Database(getApplicationContext());
                 Log.e("***", db.getAllNotes().toString());
-                //Intent intent = new Intent(getApplicationContext(), ActivityC.class);
-                //startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), ActivityC.class);
+                startActivity(intent);
             }
         });
     }

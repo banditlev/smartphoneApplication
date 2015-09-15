@@ -1,16 +1,24 @@
 package dk.lalan.noteapp_group_5;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
-public class ActivityC extends AppCompatActivity {
+//As seen on: https://developer.android.com/guide/topics/ui/layout/listview.html
+public class ActivityC extends ListActivity {
+
+    ArrayAdapter<String> adapter;
+    private Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_c);
+        db = new Database(getApplicationContext());
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, db.getAllNotes());
+        setListAdapter(adapter);
     }
 
     @Override
@@ -34,4 +42,5 @@ public class ActivityC extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
