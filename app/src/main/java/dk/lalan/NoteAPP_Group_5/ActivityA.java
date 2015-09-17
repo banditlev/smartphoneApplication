@@ -14,6 +14,7 @@ public class ActivityA extends AppCompatActivity {
     private Button newTextNoteBtn, saveTextNoteBtn, showTextnotesBtn;
     private String textnote;
     private Database db;
+    private int REQUEST_CODE = 1234;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +24,6 @@ public class ActivityA extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a);
 
-        Intent i = getIntent();
-        textnote = i.getStringExtra("textnote");
-
         newTextNoteBtn = (Button) findViewById(R.id.buttonActivityANewTextnote);
         saveTextNoteBtn = (Button) findViewById(R.id.buttonActivityASaveTextnote);
         showTextnotesBtn = (Button) findViewById(R.id.buttonActivityAShowTextnotes);
@@ -34,7 +32,7 @@ public class ActivityA extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ActivityB.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -81,5 +79,14 @@ public class ActivityA extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            if (data.hasExtra("textnote")) {
+                textnote = data.getExtras().getString("textnote");
+            }
+        }
     }
 }

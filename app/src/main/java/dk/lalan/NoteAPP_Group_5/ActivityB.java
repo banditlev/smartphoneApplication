@@ -26,9 +26,10 @@ public class ActivityB extends AppCompatActivity {
         submiteTextnoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ActivityA.class);
-                intent.putExtra("textnote", textnoteEditText.getText().toString());
-                startActivity(intent);
+                Intent data = new Intent();
+                data.putExtra("textnote", textnoteEditText.getText().toString());
+                setResult(RESULT_OK, data);
+                finish();
             }
         });
 
@@ -37,6 +38,7 @@ public class ActivityB extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ActivityA.class);
                 startActivity(intent);
+
             }
         });
     }

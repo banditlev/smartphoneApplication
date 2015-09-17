@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 
 //As seen on: https://developer.android.com/guide/topics/ui/layout/listview.html
 public class ActivityC extends ListActivity {
-
     ArrayAdapter<String> adapter;
     private Database db;
 
