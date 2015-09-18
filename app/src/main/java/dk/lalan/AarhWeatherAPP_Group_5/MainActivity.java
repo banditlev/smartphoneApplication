@@ -1,29 +1,28 @@
-package dk.lalan.noteapp_group_5;
+package dk.lalan.aarhweatherapp_group_5;
 
-import android.app.ListActivity;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 
-//As seen on: https://developer.android.com/guide/topics/ui/layout/listview.html
-public class ActivityC extends ListActivity {
-    ArrayAdapter<String> adapter;
-    private Database db;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_c);
-        db = new Database(getApplicationContext());
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, db.getAllNotes());
-        setListAdapter(adapter);
+        setContentView(R.layout.activity_main);
+
+        Intent intent = new Intent(getApplicationContext(), WeatherService.class);
+        // delay er en string fordi det nok skal kunne ændres af brugeren..
+        intent.putExtra("delay", "1");
+        startService(intent);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_activity_c, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -41,5 +40,4 @@ public class ActivityC extends ListActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

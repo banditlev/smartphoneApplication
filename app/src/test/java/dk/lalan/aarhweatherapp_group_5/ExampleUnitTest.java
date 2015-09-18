@@ -1,4 +1,4 @@
-package dk.lalan.noteapp_group_5;
+package dk.lalan.aarhweatherapp_group_5;
 
 import org.junit.Test;
 
