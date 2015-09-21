@@ -15,12 +15,65 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_centerVertical="true"
+        android:text="30"
+        android:id="@+id/delay"
+        android:layout_alignBottom="@+id/bindswitch"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:inputType="number"/>
+
+
+    <TextView
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="location"
+        android:id="@+id/location"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
+    <TextView
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="23"
+        android:id="@+id/temp"
+        android:layout_below="@+id/location"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
+    <TextView
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50kts"
+        android:id="@+id/wind"
+        android:layout_below="@+id/temp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
+    <TextView
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="description"
+        android:id="@+id/desc"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/wind"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Seconds between update:"
+        android:id="@+id/textView"
+        android:layout_above="@+id/delay"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>

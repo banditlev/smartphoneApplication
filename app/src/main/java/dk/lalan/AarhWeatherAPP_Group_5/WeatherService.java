@@ -27,6 +27,8 @@ public class WeatherService extends Service {
     private Thread servicecallthread;
     private JSONObject result;
     private int delay;
+    private boolean running = true;
+    public static final String UPDATE_IS_COMMING = "news";
 
     private final IBinder iBinder = new WeatherBinder();
 
@@ -38,28 +40,35 @@ public class WeatherService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         delay = Integer.valueOf(intent.getStringExtra("delay"))*1000;
+        running = true;
         return iBinder;
     }
 
+    @Override
+    public boolean onUnbind(Intent intent) {
+        running = false;
+        return super.onUnbind(intent);
+    }
+
     public void startWeatherCall() {
-
-
         servicecallthread = new Thread() {
             public void run() {
-                getWeatherCall();
+                makeWeatherCall();
                 try {
                     sleep(delay);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                //this.run();
+                if(running) {
+                    this.run();
+                }
             }
         };
         this.servicecallthread.start();
     }
 
-    public void getWeatherCall(){
+    public void makeWeatherCall(){
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/weather?id=2624652&units=metric");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -86,6 +95,8 @@ public class WeatherService extends Service {
 
             urlConnection.disconnect();
 
+            Intent i = new Intent(UPDATE_IS_COMMING);
+            sendBroadcast(i);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

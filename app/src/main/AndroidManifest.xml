@@ -16,6 +16,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="WeatherService.UPDATE_IS_COMMING"/>
+            </intent-filter>
         </activity>
         <service android:name=".WeatherService"
             android:exported="false" />
