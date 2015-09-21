@@ -1,7 +1,10 @@
 package dk.lalan.aarhweatherapp_group_5;
 
-import android.app.IntentService;
+import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -19,29 +22,38 @@ import java.net.URL;
 /**
  * Created by lalan on 18/09/15.
  */
-public class WeatherService extends IntentService{
+public class WeatherService extends Service {
 
     private Thread servicecallthread;
     private JSONObject result;
+    private int delay;
+
+    private final IBinder iBinder = new WeatherBinder();
 
     public WeatherService() {
-        super("WeatherService");
+        super();
     }
 
+    @Nullable
     @Override
-    protected void onHandleIntent(Intent intent) {
-        final int delay = Integer.valueOf(intent.getStringExtra("delay"))*1000;
+    public IBinder onBind(Intent intent) {
+        delay = Integer.valueOf(intent.getStringExtra("delay"))*1000;
+        return iBinder;
+    }
+
+    public void startWeatherCall() {
+
 
         servicecallthread = new Thread() {
             public void run() {
+                getWeatherCall();
                 try {
                     sleep(delay);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                getWeatherCall();
-                this.run();
+                //this.run();
             }
         };
         this.servicecallthread.start();
@@ -86,5 +98,16 @@ public class WeatherService extends IntentService{
 
     public JSONObject getWeather(){
         return result;
+    }
+
+    public boolean getTrue(){
+        return true;
+    }
+
+    public class WeatherBinder extends Binder {
+        WeatherService getService(){
+            return WeatherService.this;
+        }
+
     }
 }
