@@ -8,3 +8,5 @@
 .idea/
 .gradle/
 local.properties
+.idea/gradle.xml
+.idea/misc.xml
