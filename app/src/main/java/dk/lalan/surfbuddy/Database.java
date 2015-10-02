@@ -5,9 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,7 +15,7 @@ import models.SurfLocation;
  */
 public class Database {
 
-    private DatabaseHelper dbHelper;
+    private final DatabaseHelper dbHelper;
     private SQLiteDatabase db;
 
     public Database(Context context){
@@ -37,25 +34,25 @@ public class Database {
         dbHelper.close();
     }
 
-    public long addLocation(String name, String description, int idealDirection, String level, double lat, double lon){
+    public long addLocation(String name, int idealDirection, String level, double lat, double lon){
         open();
         Date date = new Date();
 
         ContentValues values = new ContentValues();
         values.put(dbHelper.SURF_TIME, date.toString());
         values.put(dbHelper.SURF_NAME, name);
-        values.put(dbHelper.SURF_DESCRIPTION, description);
         values.put(dbHelper.SURF_IDEAL_DIRECTION, idealDirection);
         values.put(dbHelper.SURF_LEVEL, level);
         values.put(dbHelper.SURF_LAT, lat);
         values.put(dbHelper.SURF_LON, lon);
 
         long insertId = db.insert(dbHelper.TABLE_SURF, null, values);
+        updateLocation(insertId, 0, 0.0, 0.0, 0.0, "");
         close();
         return insertId;
     }
 
-    public void updateLocation(long id, int direction, double wind, double temp, double waveHeight){
+    public void updateLocation(long id, int direction, double wind, double temp, double waveHeight, String desc){
         open();
 
         Date date = new Date();
@@ -66,6 +63,7 @@ public class Database {
         values.put(dbHelper.SURF_WIND, wind);
         values.put(dbHelper.SURF_TEMP, temp);
         values.put(dbHelper.SURF_WAVE_HEIGHT, waveHeight);
+        values.put(dbHelper.SURF_DESCRIPTION, desc);
 
         db.update(dbHelper.TABLE_SURF, values, "id=" + id, null);
         close();
@@ -118,49 +116,5 @@ public class Database {
         return locations;
     }
 
-    static class DatabaseHelper extends SQLiteOpenHelper {
 
-        private static final int DATABASE_VERSION = 1;
-        private static final String DATABASE_NAME = "surfbuddy";
-        private static final String TABLE_SURF = "surf";
-
-        private static final String SURF_ID = "id";
-        private static final String SURF_NAME = "name";
-        private static final String SURF_DESCRIPTION = "description";
-        private static final String SURF_TIME = "datetime";
-        private static final String SURF_DIRECTION = "direction";
-        private static final String SURF_WIND = "wind";
-        private static final String SURF_TEMP = "temp";
-        private static final String SURF_IDEAL_DIRECTION = "idealdirection";
-        private static final String SURF_WAVE_HEIGHT = "waveheight";
-        private static final String SURF_LEVEL = "level";
-        private static final String SURF_LAT = "lat";
-        private static final String SURF_LON = "lon";
-
-        private static volatile DatabaseHelper instance = null;
-
-        public DatabaseHelper(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            String query = "CREATE TABLE "+TABLE_SURF+" (" + SURF_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SURF_NAME + " VARCHAR(500), " + SURF_DESCRIPTION + " VARCHAR(1000), " + SURF_TIME + " VARCHAR(100), " + SURF_DIRECTION + " INTEGER, " + SURF_WIND + " DOUBLE, " + SURF_TEMP + " DOUBLE, " + SURF_IDEAL_DIRECTION + " INTEGER, " + SURF_WAVE_HEIGHT + " DOUBLE, " + SURF_LEVEL + " VARCHAR(500), " + SURF_LAT + " DOUBLE, " + SURF_LON + " DOUBLE)";
-            db.execSQL(query);
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_SURF);
-            onCreate(db);
-        }
-
-        public static synchronized DatabaseHelper getInstance(Context context) {
-            if (instance == null) {
-                instance = new DatabaseHelper(context.getApplicationContext());
-            }
-
-            return instance;
-        }
-    }
 }

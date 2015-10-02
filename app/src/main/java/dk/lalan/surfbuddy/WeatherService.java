@@ -1,9 +1,8 @@
 package dk.lalan.surfbuddy;
 
+import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
-import android.os.Binder;
-import android.os.IBinder;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -20,29 +19,27 @@ import models.SurfLocation;
 /**
  * Created by lundtoft on 02/10/15.
  */
-public class WeatherService extends Service {
+public class WeatherService extends IntentService {
 
-    private final IBinder iBinder = new WeatherBinder();
-    private int delay;
-    private JSONObject result;
     private Thread servicecallthread;
     private Database db;
+    private Intent broadcastIntent;
+    public static final String WEATHER_UPDATE = "dk.lalan.surfbuddy.weatherupdate";
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        delay = Integer.valueOf(intent.getStringExtra("delay"))*1000;
-        return iBinder;
+    public WeatherService() {
+        super("WeatherService");
     }
 
-    public void startFetcher() {
+    @Override
+    protected void onHandleIntent(Intent intent) {
 
         db = new Database(getApplicationContext());
-        Log.e("***", "TEST");
+
         servicecallthread = new Thread() {
             public void run() {
                 fetchWeather();
                 try {
-                    sleep(delay);
+                    sleep(5000);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -77,11 +74,9 @@ public class WeatherService extends Service {
                 double wind = responseObj.getJSONObject("wind").getDouble("speed");
                 double temp = responseObj.getJSONObject("main").getDouble("temp");
                 double waveHeight = responseObj.getJSONObject("main").getDouble("sea_level");
+                String desc = responseObj.getJSONArray("weather").getJSONObject(0).getString("description");
 
-                db.updateLocation(sf.getId(), direction, wind, temp, waveHeight);
-
-
-                //Log.i("****", result.toString());
+                db.updateLocation(sf.getId(), direction, wind, temp, waveHeight, desc);
 
                 urlConnection.disconnect();
             }
@@ -89,11 +84,9 @@ public class WeatherService extends Service {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        broadcastIntent = new Intent(WEATHER_UPDATE);
+        sendBroadcast(broadcastIntent);
     }
 
-    public class WeatherBinder extends Binder {
-        WeatherService getService(){
-            return WeatherService.this;
-        }
-    }
 }

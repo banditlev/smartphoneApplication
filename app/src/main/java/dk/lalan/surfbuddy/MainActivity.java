@@ -1,32 +1,29 @@
 package dk.lalan.surfbuddy;
 
 import android.app.Activity;
-import android.content.ComponentName;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
+
+import models.SurfLocation;
 
 public class MainActivity extends Activity {
 
-    public WeatherService mService;
-    public boolean mBound;
-    private ServiceConnection con = new ServiceConnection() {
+    private Database db;
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
 
+        //Inspiration: http://www.vogella.com/tutorials/AndroidServices/article.html
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            WeatherService.WeatherBinder binder = (WeatherService.WeatherBinder) service;
-            mService = binder.getService();
-            mService.startFetcher();
-            mBound = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            mBound = false;
+        public void onReceive(Context context, Intent intent){
+            if(intent.getAction().equals(WeatherService.WEATHER_UPDATE)) {
+                for (SurfLocation sf : db.getAllLocations()) {
+                    Toast.makeText(MainActivity.this, sf.getDescribtion(), Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     };
 
@@ -35,10 +32,16 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, WeatherService.class);
-        intent.putExtra("delay", "5");
-        bindService(intent, con, Context.BIND_AUTO_CREATE);
+        db = new Database(getApplicationContext());
 
+        db.clearDB();
+        //long id = db.addLocation("Klitmøller", 90, "Hardcore!", 57.12, 8.62);
+
+        Intent bgService = new Intent(getApplicationContext(), WeatherService.class);
+        startService(bgService);
+
+        IntentFilter intentFilter = new IntentFilter(WeatherService.WEATHER_UPDATE);
+        registerReceiver(receiver, intentFilter);
     }
 
     @Override
