@@ -4,11 +4,13 @@ package models;
  * Created by lalan on 02/10/15.
  */
 public class SurfLocation {
+    public long id;
     public double longitude, latitude, windSpeed, temperatur, waveHeight;
     public String name, describtion, level;
     public int windDir, surfDir;
 
-    public SurfLocation(Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, String level, int windDir, int surfDir) {
+    public SurfLocation(long id, Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, String level, int windDir, int surfDir) {
+        this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
         this.windSpeed = windSpeed;
@@ -99,5 +101,13 @@ public class SurfLocation {
 
     public void setSurfDir(int surfDir) {
         this.surfDir = surfDir;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -109,7 +109,8 @@ public class Database {
             String level = cursor.getString(cursor.getColumnIndex(dbHelper.SURF_LEVEL));
             int windDir = Integer.parseInt(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_DIRECTION)));
             int surfDir = Integer.parseInt(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_IDEAL_DIRECTION)));
-            locations.add(new SurfLocation(longitude, latitude, windSpeed, temperature, waveHeight, name, description, level, windDir, surfDir));
+            long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_ID)));
+            locations.add(new SurfLocation(id, longitude, latitude, windSpeed, temperature, waveHeight, name, description, level, windDir, surfDir));
         }
 
         cursor.close();
