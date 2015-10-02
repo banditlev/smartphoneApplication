@@ -30,4 +30,8 @@ public class DummySurfer {
     public double getTemp(){
         return 13.8;
     }
+
+    public boolean isSurfable(){
+        return true;
+    }
 }

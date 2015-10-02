@@ -135,17 +135,15 @@
             android:layout_above="@id/cardviewDivider"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="20dp"
-            android:layout_alignRight="@id/cardviewDivider"
-            android:src="@mipmap/ic_direction_green"/>
+            android:layout_alignRight="@id/cardviewDivider" />
         <ImageView
             android:id="@+id/favoriteWindDirectionArrow"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_above="@id/cardviewDivider"
             android:layout_marginRight="60dp"
-            android:layout_marginBottom="54dp"
+            android:layout_marginBottom="50dp"
             android:layout_alignRight="@id/cardviewDivider"
-            android:src="@mipmap/ic_arrow_green"
             />
 
     </RelativeLayout>
