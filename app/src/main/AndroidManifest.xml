@@ -10,6 +10,11 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/mainActivityTitle" >
+        </activity>
+        <activity
+            android:name=".Browse"
+            android:label="@string/title_activity_browse"
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,4 +22,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

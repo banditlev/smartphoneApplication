@@ -3,4 +3,9 @@
     <string name="mainActivityTitle">Favorites</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_browse">Browse</string>
+    <string name="browse_action_distance">Distance</string>
+    <string name="browse_action_level">Level</string>
+    <string name="browse_action_wind">Wind</string>
+
 </resources>
