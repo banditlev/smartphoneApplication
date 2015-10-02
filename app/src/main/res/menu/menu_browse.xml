@@ -1,5 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" tools:context="dk.lalan.surfbuddy.Browse">
+    xmlns:tools="http://schemas.android.com/tools" tools:context="dk.lalan.surfbuddy.BrowseActivity">
 
     <item android:id="@+id/browse_action_distance" android:title="@string/browse_action_distance"
         android:orderInCategory="100" android:showAsAction="never" />
@@ -16,7 +16,7 @@
         android:orderInCategory="200"
         android:title="Refresh"
         android:icon="@drawable/ic_refresh"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         ></item>
 
     <!-- inspiret by: http://www.androidhive.info/2013/11/android-working-with-action-bar/ -->

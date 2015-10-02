@@ -5,15 +5,15 @@
 
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:id="@+id/browse_wind_imageView"
         android:layout_alignParentEnd="true"
         android:background="#d21010"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,17 +23,18 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="10dp"
         android:textSize="20sp" />
 
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="10 knots"
         android:id="@+id/browse_wind_textview"
         android:textSize="15sp"
+        android:textColor="#878787"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="40dp"/>
 
     <TextView
@@ -42,8 +43,9 @@
         android:text="50km"
         android:id="@+id/browse_distance_textview"
         android:textSize="15sp"
+        android:textColor="#878787"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="7dp"
         android:layout_marginLeft="174dp"/>
 
     <ImageView
@@ -52,7 +54,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="7dp"
         android:src="@mipmap/ic_wind"/>
 
     <ImageView
@@ -61,7 +63,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="150dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="8dp"
         android:src="@mipmap/ic_position" />
 
 

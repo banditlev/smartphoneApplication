@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dk.lalan.surfbuddy" >
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_Fine_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +16,7 @@
             android:label="@string/mainActivityTitle" >
         </activity>
         <activity
-            android:name=".Browse"
+            android:name=".BrowseActivity"
             android:label="@string/title_activity_browse"
             android:parentActivityName=".MainActivity">
             <intent-filter>
@@ -20,7 +24,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="BrowseService.UPDATE_IS_COMMING"/>
+            </intent-filter>
         </activity>
+        <service android:name=".BrowseService"
+            android:exported="false" />
     </application>
+
+
 
 </manifest>

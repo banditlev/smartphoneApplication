@@ -1,11 +1,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dk.lalan.surfbuddy.Browse">
+    tools:context="dk.lalan.surfbuddy.BrowseActivity" android:background="@color/bg">
 
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/browse_listview" android:background="@color/bg"></ListView>
+        android:id="@+id/browse_listview" android:background="@color/bg" android:visibility="invisible"></ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/browse_progressbar_layout">
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/browse_progressbar"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/browse_progressbar"
+            android:text="Getting your drug.."
+            android:layout_centerHorizontal="true"
+            android:textColor="#878787"
+            android:paddingBottom="25dp"/>
+
+    </RelativeLayout>
+
+
 
 </RelativeLayout>
