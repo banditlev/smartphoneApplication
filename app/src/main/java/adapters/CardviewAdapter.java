@@ -25,12 +25,12 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
 
     private List<DummySurfer> favorites;
     private int rowLayout;
-    private Context mContext;
+    private Context context;
 
-    public CardviewAdapter(List<DummySurfer> favorites, int rowLayout, Context context){
+    public CardviewAdapter(List<DummySurfer> favorites, int rowLayout, Context _context){
         this.favorites = favorites;
         this.rowLayout = rowLayout;
-        this.mContext = context;
+        this.context = _context;
     }
 
     @Override
@@ -42,11 +42,11 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i){
         DummySurfer favorite = favorites.get(i);
-        
         viewHolder.favoriteName.setText(favorite.getName());
-        viewHolder.favoriteWindDirectionImage.setImageDrawable(mContext.getDrawable(R.mipmap.ic_direction));
         viewHolder.favoriteDescription.setText(favorite.getDescription());
         viewHolder.favoriteWindDirection.setText(favorite.getWindDirection());
+        viewHolder.favoriteTemp.setText(Double.toString(favorite.getTemp()) + "º C");
+        viewHolder.favoriteWindSpeed.setText(Double.toString(favorite.getWindSpeed()) + " knots");
     }
 
     @Override
@@ -55,15 +55,15 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView favoriteName, favoriteDescription, favoriteWindDirection;
-        public ImageView favoriteWindDirectionImage;
+        public TextView favoriteName, favoriteDescription, favoriteWindDirection, favoriteWindSpeed, favoriteTemp;
 
         public ViewHolder(View itemView) {
             super(itemView);
             favoriteName = (TextView) itemView.findViewById(R.id.favoriteName);
-            favoriteWindDirectionImage = (ImageView)itemView.findViewById(R.id.favoriteWindDirectionImage);
             favoriteDescription = (TextView) itemView.findViewById(R.id.favoriteDescription);
             favoriteWindDirection = (TextView) itemView.findViewById(R.id.favoriteWindDirection);
+            favoriteWindSpeed = (TextView) itemView.findViewById(R.id.favoriteWindSpeed);
+            favoriteTemp = (TextView) itemView.findViewById(R.id.favoriteTemp);
         }
 
     }

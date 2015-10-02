@@ -22,4 +22,12 @@ public class DummySurfer {
     public String getWindDirection(){
         return "NW";
     }
+
+    public double getWindSpeed(){
+        return 23.2;
+    }
+
+    public double getTemp(){
+        return 13.8;
+    }
 }

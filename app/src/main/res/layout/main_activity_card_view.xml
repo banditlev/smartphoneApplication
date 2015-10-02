@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/standard_text_color"
             />
         <TextView
             android:id="@+id/favoriteDescription"
@@ -35,31 +35,99 @@
             android:clickable="true"
             android:paddingLeft="15dp"
             android:paddingTop="1dp"
+            android:paddingBottom="30dp"
             android:hint="TestText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#4a4a4a"
+            android:textColor="@color/sub_title_card_color"
             />
         <ImageView
             android:layout_below="@id/favoriteDescription"
             android:id="@+id/favoriteWindDirectionImage"
             android:paddingLeft="15dp"
-            android:paddingTop="40dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
+            android:paddingTop="0dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@mipmap/ic_direction"
             />
         <TextView
             android:id="@+id/favoriteWindDirection"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_below="@id/favoriteDescription"
             android:layout_toRightOf="@id/favoriteWindDirectionImage"
-            android:paddingTop="44dp"
-            android:paddingLeft="5dp"
-            android:textColor="#4a4a4a"
-            android:textSize="25dp"/>
+            android:paddingTop="8dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/standard_text_color"
+            android:textSize="23dp"/>
+        <ImageView
+            android:layout_below="@id/favoriteWindDirectionImage"
+            android:id="@+id/favoriteWindSpeedImage"
+            android:paddingLeft="15dp"
+            android:paddingTop="0dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@mipmap/ic_wind"
+            />
+        <TextView
+            android:id="@+id/favoriteWindSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_below="@id/favoriteWindDirection"
+            android:layout_toRightOf="@id/favoriteWindSpeedImage"
+            android:paddingTop="8dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/standard_text_color"
+            android:textSize="23dp"/>
+
+        <ImageView
+            android:layout_below="@id/favoriteWindSpeedImage"
+            android:id="@+id/favoriteTempImage"
+            android:paddingLeft="15dp"
+            android:paddingTop="0dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@mipmap/ic_temp"
+            />
+
+        <TextView
+            android:id="@+id/favoriteTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_below="@id/favoriteWindSpeed"
+            android:layout_toRightOf="@id/favoriteTempImage"
+            android:paddingTop="8dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/standard_text_color"
+            android:textSize="23dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_below="@id/favoriteTemp"
+            android:id="@+id/cardviewDivider"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardviewDivider"
+            android:paddingLeft="20dp"
+            android:paddingTop="18dp"
+            android:text="@string/navigate_action_button_text"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/cardviewDivider"
+            android:layout_below="@id/cardviewDivider"
+            android:text="@string/more_info_action_button_text"
+            android:paddingTop="18dp"
+            android:paddingRight="20dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/sub_title_card_color"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
