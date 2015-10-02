@@ -25,8 +25,12 @@ public class Database {
         dbHelper = DatabaseHelper.getInstance(context);
     }
 
-    public void open() throws SQLiteException{
-        db = dbHelper.getWritableDatabase();
+    public void open(){
+        try {
+            db = dbHelper.getWritableDatabase();
+        } catch (SQLiteException e){
+            e.printStackTrace();
+        }
     }
 
     public void close(){
@@ -34,11 +38,7 @@ public class Database {
     }
 
     public long addLocation(String name, String description, int idealDirection, String level, double lat, double lon){
-        try {
-            open();
-        } catch (SQLiteException e) {
-            e.printStackTrace();
-        }
+        open();
         Date date = new Date();
 
         ContentValues values = new ContentValues();
@@ -56,11 +56,7 @@ public class Database {
     }
 
     public void updateLocation(long id, int direction, double wind, double temp, double waveHeight){
-        try {
-            open();
-        } catch (SQLiteException e) {
-            e.printStackTrace();
-        }
+        open();
 
         Date date = new Date();
 
@@ -72,6 +68,23 @@ public class Database {
         values.put(dbHelper.SURF_WAVE_HEIGHT, waveHeight);
 
         db.update(dbHelper.TABLE_SURF, values, "id=" + id, null);
+        close();
+    }
+
+    public void clearDB(){
+        open();
+
+        db.delete(dbHelper.TABLE_SURF, null, null);
+
+        close();
+    }
+
+    public void removeLocation(long id){
+        open();
+
+        db.delete(dbHelper.TABLE_SURF, "id=" + id, null);
+
+        close();
     }
 
     public ArrayList<SurfLocation> getAllLocations(){
