@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4a90e2</color>
+    <color name="statusBarColor">#4d7ab9</color>
+    <color name="bg">#EEE</color>
+    <color name="actionBarTextColor">#FFF</color>
+    <color name="actionBarTitleColor">#FFF</color>
+</resources>
