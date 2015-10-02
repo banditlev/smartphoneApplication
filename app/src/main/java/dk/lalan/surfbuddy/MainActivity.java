@@ -20,9 +20,13 @@ public class MainActivity extends Activity {
     private RecyclerView mRecyclerView;
     private CardviewAdapter mAdapter;
 
-    public DummySurfer surf1 = new DummySurfer("peter bvhjvasbkhw vhgj v");
-    public DummySurfer surf2 = new DummySurfer("peter bvhjvasbkhw vhgj v");
-    public DummySurfer surf3 = new DummySurfer("peter bvhjvasbkhw vhgj v");
+    public DummySurfer surf1 = new DummySurfer("Klitmøller");
+    public DummySurfer surf2 = new DummySurfer("Klitmøller");
+    public DummySurfer surf3 = new DummySurfer("Klitmøller");
+    public DummySurfer surf4 = new DummySurfer("Klitmøller");
+    public DummySurfer surf5 = new DummySurfer("Klitmøller");
+    public DummySurfer surf6 = new DummySurfer("Klitmøller");
+    public DummySurfer surf7 = new DummySurfer("Klitmøller");
 
     public List<DummySurfer> favorites = new ArrayList<>();
 
@@ -38,6 +42,10 @@ public class MainActivity extends Activity {
         favorites.add(surf1);
         favorites.add(surf2);
         favorites.add(surf3);
+        favorites.add(surf4);
+        favorites.add(surf5);
+        favorites.add(surf6);
+        favorites.add(surf7);
 
         mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, this);
         mRecyclerView.setAdapter(mAdapter);

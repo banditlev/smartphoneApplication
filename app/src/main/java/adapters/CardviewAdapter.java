@@ -20,6 +20,7 @@ import models.SurfLocation;
 /**
  * Created by banditlev on 02/10/15.
  */
+//Inspired by: http://treyrobinson.net/blog/android-l-tutorials-part-3-recyclerview-and-cardview/
 public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHolder> {
 
     private List<DummySurfer> favorites;
@@ -41,10 +42,11 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i){
         DummySurfer favorite = favorites.get(i);
-        Log.e("***", "Fav name: " + favorite.getName());
         
         viewHolder.favoriteName.setText(favorite.getName());
-        //viewHolder.favoriteImage.setImageDrawable(mContext.getDrawable(favorite.getImageResourceId(mContext)));
+        viewHolder.favoriteWindDirectionImage.setImageDrawable(mContext.getDrawable(R.mipmap.ic_direction));
+        viewHolder.favoriteDescription.setText(favorite.getDescription());
+        viewHolder.favoriteWindDirection.setText(favorite.getWindDirection());
     }
 
     @Override
@@ -53,13 +55,15 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView favoriteName;
-        public ImageView favoriteImage;
+        public TextView favoriteName, favoriteDescription, favoriteWindDirection;
+        public ImageView favoriteWindDirectionImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             favoriteName = (TextView) itemView.findViewById(R.id.favoriteName);
-            //favoriteImage = (ImageView)itemView.findViewById(R.id.favoriteImage);
+            favoriteWindDirectionImage = (ImageView)itemView.findViewById(R.id.favoriteWindDirectionImage);
+            favoriteDescription = (TextView) itemView.findViewById(R.id.favoriteDescription);
+            favoriteWindDirection = (TextView) itemView.findViewById(R.id.favoriteWindDirection);
         }
 
     }
