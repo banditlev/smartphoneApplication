@@ -4,23 +4,21 @@ package models;
  * Created by lalan on 02/10/15.
  */
 public class SurfLocation {
-    public Double longitude, latetude, windSpeed, temperatur, waveHeight;
+    public double longitude, latitude, windSpeed, temperatur, waveHeight;
     public String name, describtion, level;
-    public int surfWindFrom, surfwindTo;
-    public Boolean surfAble;
+    public int windDir, surfDir;
 
-    public SurfLocation(Double longitude, Double latetude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, String level, int surfWindFrom, int surfwindTo, Boolean surfAble) {
+    public SurfLocation(Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, String level, int windDir, int surfDir) {
         this.longitude = longitude;
-        this.latetude = latetude;
+        this.latitude = latitude;
         this.windSpeed = windSpeed;
         this.temperatur = temperatur;
         this.waveHeight = waveHeight;
         this.name = name;
         this.describtion = describtion;
         this.level = level;
-        this.surfWindFrom = surfWindFrom;
-        this.surfwindTo = surfwindTo;
-        this.surfAble = surfAble;
+        this.windDir = windDir;
+        this.surfDir = surfDir;
     }
 
     public Double getLongitude() {
@@ -31,12 +29,12 @@ public class SurfLocation {
         this.longitude = longitude;
     }
 
-    public Double getLatetud() {
-        return latetude;
+    public Double getlatitude() {
+        return latitude;
     }
 
-    public void setLatetud(Double latetud) {
-        this.latetude = latetud;
+    public void setlatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public Double getWindSpeed() {
@@ -87,27 +85,19 @@ public class SurfLocation {
         this.level = level;
     }
 
-    public int getSurfWindFrom() {
-        return surfWindFrom;
+    public int getWindDir() {
+        return windDir;
     }
 
-    public void setSurfWindFrom(int surfWindFrom) {
-        this.surfWindFrom = surfWindFrom;
+    public void setWindDir(int surfWind) {
+        this.windDir = surfWind;
     }
 
-    public int getSurfwindTo() {
-        return surfwindTo;
+    public int getSurfDir() {
+        return surfDir;
     }
 
-    public void setSurfwindTo(int surfwindTo) {
-        this.surfwindTo = surfwindTo;
-    }
-
-    public Boolean getSurfAble() {
-        return surfAble;
-    }
-
-    public void setSurfAble(Boolean surfAble) {
-        this.surfAble = surfAble;
+    public void setSurfDir(int surfDir) {
+        this.surfDir = surfDir;
     }
 }
