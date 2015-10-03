@@ -64,11 +64,6 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
             public void onClick(View v) {
                 Toast.makeText(context, "Button click Nav " + row, Toast.LENGTH_SHORT).show();
                 //Start google maps
-                /*
-                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", favorite.getlatitude(), favorite.getLongitude());
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);*/
                 String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", favorite.getlatitude(), favorite.getLongitude(), "Surf spot - " + favorite.getName());
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -81,6 +76,9 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Button click More " + row, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context , BrowseActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
 
