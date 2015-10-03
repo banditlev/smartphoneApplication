@@ -37,6 +37,7 @@ public class LocationInformationActivity extends AppCompatActivity {
 
     }
 
+    //Inspiration from: https://github.com/chrisbanes/cheesesquare
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new InformationFragment(), "Data");
@@ -45,6 +46,7 @@ public class LocationInformationActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    //Inspiration from: https://github.com/chrisbanes/cheesesquare
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
