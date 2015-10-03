@@ -1,15 +1,32 @@
 package models;
 
+import android.util.Log;
+
 /**
- * Created by lalan on 02/10/15.
+ * Created by lundtoft on 02/10/15.
  */
 public class SurfLocation {
-    public long id;
-    public double longitude, latitude, windSpeed, temperatur, waveHeight;
-    public String name, describtion, level;
-    public int windDir, surfDir;
+    private long id;
+    private double longitude, latitude, windSpeed, temperatur, waveHeight, distance;
+    private String name, describtion, locationDescription;
+    private int windDir, surfDir, level;
 
-    public SurfLocation(long id, Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, String level, int windDir, int surfDir) {
+    /**
+     * Constructor that fills all information
+     *  @param id
+     * @param longitude
+     * @param latitude
+     * @param windSpeed
+     * @param temperatur
+     * @param waveHeight
+     * @param name
+     * @param describtion
+     * @param level
+     * @param windDir
+     * @param surfDir
+     * @param locationDescription
+     */
+    public SurfLocation(long id, Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, int level, int windDir, int surfDir, String locationDescription, double distance) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -21,6 +38,35 @@ public class SurfLocation {
         this.level = level;
         this.windDir = windDir;
         this.surfDir = surfDir;
+        this.locationDescription = locationDescription;
+        this.distance = distance;
+    }
+
+    /**
+     * Simple constructor that sets all variables to null
+     */
+    public SurfLocation(){
+        this.id = 0;
+        this.longitude = 0.0;
+        this.latitude = 0.0;
+        this.windSpeed = 0.0;
+        this.temperatur = 0.0;
+        this.waveHeight = 0.0;
+        this.name = null;
+        this.describtion = null;
+        this.level = 0;
+        this.windDir = 0;
+        this.surfDir = 0;
+        this.locationDescription = null;
+        this.distance = 0.0;
+    }
+
+    public String getLocationDescription() {
+        return locationDescription;
+    }
+
+    public void setLocationDescription(String locationDescription) {
+        this.locationDescription = locationDescription;
     }
 
     public Double getLongitude() {
@@ -79,11 +125,11 @@ public class SurfLocation {
         this.describtion = describtion;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
@@ -109,5 +155,23 @@ public class SurfLocation {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public boolean isSurfable(){
+        int absDist = Math.abs(surfDir - windDir);
+
+        if(absDist < 30){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

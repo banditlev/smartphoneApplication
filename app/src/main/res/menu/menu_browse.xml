@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="dk.lalan.surfbuddy.BrowseActivity">
+
+    <item android:id="@+id/browse_action_alphabetic" android:title="@string/browse_action_alphabetic"
+        android:orderInCategory="100" android:showAsAction="never" />
+
+    <item android:id="@+id/browse_action_distance" android:title="@string/browse_action_distance"
+        android:orderInCategory="100" android:showAsAction="never" />
+
+    <item android:id="@+id/browse_action_wind" android:title="@string/browse_action_wind"
+        android:orderInCategory="100" android:showAsAction="never" />
+
+    <item android:id="@+id/browse_action_level" android:title="@string/browse_action_level"
+        android:orderInCategory="100" android:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/browse_action_refresh"
+        android:orderInCategory="200"
+        android:title="Refresh"
+        android:icon="@drawable/ic_refresh"
+        android:showAsAction="ifRoom"
+        ></item>
+
+    <!-- inspiret by: http://www.androidhive.info/2013/11/android-working-with-action-bar/ -->
+    <item
+        android:id="@+id/browse_action_search"
+        android:orderInCategory="200"
+        android:title="Search"
+        android:icon="@drawable/ic_search"
+        android:showAsAction="ifRoom"
+        android:actionViewClass="android.widget.SearchView"
+        ></item>
+
+</menu>

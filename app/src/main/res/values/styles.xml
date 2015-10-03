@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Making custom menu design, inspiret by: http://scriptedpapers.com/2015/02/12/android-action-bar-and-overflow-menu-customization-with-theme-appcompat/-->
     <style name="AppTheme" parent="android:Theme.Material">
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/MyActionBar</item>

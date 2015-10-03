@@ -5,4 +5,10 @@
     <string name="action_settings">Settings</string>
     <string name="navigate_action_button_text">NAVIGATE</string>
     <string name="more_info_action_button_text">MORE INFO</string>
+    <string name="title_activity_browse">Browse</string>
+    <string name="browse_action_distance">Distance</string>
+    <string name="browse_action_level">Level</string>
+    <string name="browse_action_wind">Wind</string>
+    <string name="browse_action_alphabetic">Alphabetic</string>
+    <string name="level_beginner">Beginner</string>
 </resources>
