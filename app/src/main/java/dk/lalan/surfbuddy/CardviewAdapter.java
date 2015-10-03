@@ -45,7 +45,7 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         final int row = i;
         viewHolder.favoriteName.setText(favorite.getName());
         viewHolder.favoriteDescription.setText(favorite.getDescribtion());
-        viewHolder.favoriteWindDirection.setText(Integer.toString(favorite.getWindDir()));
+        viewHolder.favoriteWindDirection.setText(favorite.getWindDirString());
         viewHolder.favoriteTemp.setText(Double.toString(favorite.getTemperatur()) + "º C");
         viewHolder.favoriteWindSpeed.setText(Double.toString(favorite.getWindSpeed()) + " knots");
         viewHolder.favoriteWindDirectionRing.setImageDrawable(context.getDrawable(R.mipmap.ic_direction_green));

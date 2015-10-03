@@ -174,4 +174,33 @@ public class SurfLocation {
             return false;
         }
     }
+    public String getWindDirString(){
+        String windString = "";
+        int wind = getWindDir();
+        if(wind >= 337 || wind < 22){
+            windString = "N";
+        }
+        if(wind >= 22 && wind < 67){
+            windString = "NE";
+        }
+        if(wind >= 67 && wind < 112){
+            windString = "E";
+        }
+        if(wind >= 112 && wind < 157){
+            windString = "SE";
+        }
+        if(wind >= 157 && wind < 202){
+            windString = "S";
+        }
+        if(wind >= 202 && wind < 247){
+            windString = "SW";
+        }
+        if(wind >= 247 && wind < 292){
+            windString = "W";
+        }
+        if(wind <= 292 && wind < 337){
+            windString = "NW";
+        }
+        return windString;
+    }
 }
