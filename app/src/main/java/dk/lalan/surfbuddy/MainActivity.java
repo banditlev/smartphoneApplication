@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         public void onReceive(Context context, Intent intent){
             if(intent.getAction().equals(WeatherService.WEATHER_UPDATE)) {
                 for (SurfLocation sf : db.getAllLocations()) {
-                    Toast.makeText(MainActivity.this, sf.getDescribtion(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, sf.getDescribtion(), Toast.LENGTH_SHORT).show();
                 }
                 favorites = db.getAllLocations();
                 if(!favorites.isEmpty()) {

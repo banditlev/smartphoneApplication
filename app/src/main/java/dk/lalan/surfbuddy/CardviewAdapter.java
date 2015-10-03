@@ -2,6 +2,8 @@ package dk.lalan.surfbuddy;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by banditlev on 02/10/15.
@@ -38,7 +41,7 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i){
-        SurfLocation favorite = favorites.get(i);
+        final SurfLocation favorite = favorites.get(i);
         final int row = i;
         viewHolder.favoriteName.setText(favorite.getName());
         viewHolder.favoriteDescription.setText(favorite.getDescribtion());
@@ -60,6 +63,17 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Button click Nav " + row, Toast.LENGTH_SHORT).show();
+                //Start google maps
+                /*
+                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", favorite.getlatitude(), favorite.getLongitude());
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);*/
+                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", favorite.getlatitude(), favorite.getLongitude(), "Surf spot - " + favorite.getName());
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                context.startActivity(intent);
             }
         });
 

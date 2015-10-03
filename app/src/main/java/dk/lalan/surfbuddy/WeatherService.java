@@ -35,7 +35,7 @@ public class WeatherService extends IntentService {
             public void run() {
                 fetchWeather();
                 try {
-                    sleep(5000);
+                    sleep(20000);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
