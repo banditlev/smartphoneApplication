@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class BrowseActivity extends Activity {
+public class BrowseActivity extends AppCompatActivity {
 
     public BrowseService mService;
     public boolean mBound;
@@ -126,6 +127,8 @@ public class BrowseActivity extends Activity {
                 Toast.makeText(getApplicationContext(),"level", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.browse_action_refresh:
+                progress.setVisibility(View.VISIBLE);
+                listview.setVisibility(View.INVISIBLE);
                 mService.startFetcher();
                 Toast.makeText(getApplicationContext(),"refresh", Toast.LENGTH_SHORT).show();
                 return true;

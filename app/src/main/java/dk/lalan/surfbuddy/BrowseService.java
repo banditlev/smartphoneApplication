@@ -35,10 +35,13 @@ public class BrowseService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         initLocations();
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        /*LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         myLocation = lm.getLastKnownLocation
                 (LocationManager.GPS_PROVIDER);
-        Log.i("***", "LOCATION - long: " + myLocation.getLongitude() + " lat: " + myLocation.getLatitude());
+        Log.i("***", "LOCATION - long: " + myLocation.getLongitude() + " lat: " + myLocation.getLatitude());*/
+        myLocation = new Location("");
+        myLocation.setLatitude(55.57);
+        myLocation.setLongitude(10.09);
         return iBinder;
     }
 
