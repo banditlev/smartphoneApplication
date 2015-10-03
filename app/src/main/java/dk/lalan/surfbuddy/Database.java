@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -106,7 +108,10 @@ public class Database {
             int windDir = Integer.parseInt(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_DIRECTION)));
             int surfDir = Integer.parseInt(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_IDEAL_DIRECTION)));
             long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_ID)));
-            locations.add(new SurfLocation(id, longitude, latitude, windSpeed, temperature, waveHeight, name, description, level, windDir, surfDir, "", 0));
+            String update = cursor.getString(cursor.getColumnIndex(dbHelper.SURF_TIME));
+
+            update = new SimpleDateFormat("EEE, HH:mm").format(update);
+            locations.add(new SurfLocation(id, longitude, latitude, windSpeed, temperature, waveHeight, name, description, level, windDir, surfDir, "", 0, update));
         }
 
         cursor.close();

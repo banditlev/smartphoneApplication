@@ -18,6 +18,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -104,8 +106,11 @@ public class BrowseService extends Service {
                 dist = dist / 100;
                 sf.setDistance(dist);
 
+                String date = new SimpleDateFormat("EEE, HH:mm").format(new Date());
+                sf.setUpdated(date);
+
                 urlConnection.disconnect();
-                //break;
+                break;
             }
             Intent i = new Intent(UPDATE_IS_COMMING);
             sendBroadcast(i);

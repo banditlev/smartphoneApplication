@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public class SurfLocation {
     private long id;
     private double longitude, latitude, windSpeed, temperatur, waveHeight, distance;
-    private String name, describtion, locationDescription;
+    private String name, describtion, locationDescription, updated;
     private int windDir, surfDir, level;
 
     /**
@@ -30,7 +30,7 @@ public class SurfLocation {
      * @param surfDir
      * @param locationDescription
      */
-    public SurfLocation(long id, Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, int level, int windDir, int surfDir, String locationDescription, double distance) {
+    public SurfLocation(long id, Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, int level, int windDir, int surfDir, String locationDescription, double distance, String updated) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -44,6 +44,7 @@ public class SurfLocation {
         this.surfDir = surfDir;
         this.locationDescription = locationDescription;
         this.distance = distance;
+        this.updated = updated;
     }
 
     /**
@@ -63,6 +64,7 @@ public class SurfLocation {
         this.surfDir = 0;
         this.locationDescription = "";
         this.distance = 0.0;
+        this.updated = "";
     }
 
     public String getLocationDescription() {
@@ -169,6 +171,14 @@ public class SurfLocation {
         this.distance = distance;
     }
 
+    public String getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
     public boolean isSurfable(){
         int absDist = Math.abs(surfDir - windDir);
 
@@ -269,6 +279,7 @@ public class SurfLocation {
             json.put("surfDir", surfDir);
             json.put("locationDescription", locationDescription);
             json.put("distance", distance);
+            json.put("updated", updated);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -293,8 +304,9 @@ public class SurfLocation {
             this.level = json.getInt("level");
             this.windDir = json.getInt("windDir");
             this.surfDir = json.getInt("surfDir");
-            this.locationDescription = json.getString("describtion");
+            this.locationDescription = json.getString("locationDescription");
             this.distance = json.getDouble("distance");
+            this.updated = json.getString("updated");
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package dk.lalan.surfbuddy;
 
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,9 +38,23 @@ public class DataFragment extends Fragment {
         windDirection.setText(sf.getWindDirString());
         windSpeed.setText(sf.getWindSpeed() + " " + this.getResources().getString(R.string.knots));
         temp.setText(sf.getTemperatur() + " ºC");
+
+        if (sf.getDistance() == 0.0){
+            Location surfLocation = new Location("");
+            surfLocation.setLongitude(sf.getLongitude());
+            surfLocation.setLatitude(sf.getlatitude());
+            Location myLocation = new Location("");
+            myLocation.setLatitude(56.15);
+            myLocation.setLongitude(10.20);
+            double dist = myLocation.distanceTo(surfLocation) / 1000;
+            dist = Math.round(dist * 100);
+            dist = dist / 100;
+            sf.setDistance(dist);
+        }
+
         distance.setText(sf.getDistance() + " km");
         description.setText(this.getResources().getString(R.string.conditions_is) + sf.getDescribtion());
-        updated.setText("???");
+        updated.setText(sf.getUpdated());
 
         if (sf.isSurfable()){
             windSurfDirection.setImageDrawable(this.getResources().getDrawable(R.drawable.arrow_green));
