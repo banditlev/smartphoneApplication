@@ -1,7 +1,9 @@
 package dk.lalan.surfbuddy;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +20,9 @@ import java.util.List;
 public class LocationInformationActivity extends AppCompatActivity {
 
     private SurfLocation surfLocation;
+    private boolean isFavorite;
+    private FloatingActionButton fab;
+    private Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,35 @@ public class LocationInformationActivity extends AppCompatActivity {
         }
 
         tabLayout.setupWithViewPager(viewPager);
+
+        fab = (FloatingActionButton) findViewById(R.id.favBtn);
+
+        db = new Database(getApplicationContext());
+
+        for(SurfLocation sl : db.getAllLocations()){
+            if(sl.getName().equals(surfLocation.getName())){
+                isFavorite = true;
+                fab.setImageDrawable(getDrawable(R.drawable.ic_favorite_white_24dp));
+                surfLocation.setId(sl.getId());
+            }
+        }
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isFavorite){
+                    fab.setImageDrawable(getDrawable(R.drawable.ic_favorite_border_white_24dp));
+                    Toast.makeText(getApplicationContext(), "Removed from favorites", Toast.LENGTH_SHORT).show();
+                    db.removeLocation(surfLocation.getId());
+                    isFavorite = false;
+                }else {
+                    fab.setImageDrawable(getDrawable(R.drawable.ic_favorite_white_24dp));
+                    Toast.makeText(getApplicationContext(), "Added to favorites!", Toast.LENGTH_SHORT).show();
+                    surfLocation.setId(db.addLocation(surfLocation.getName(), surfLocation.getSurfDir(), surfLocation.getLevel(), surfLocation.getlatitude(), surfLocation.getLongitude()));
+                    isFavorite = true;
+                }
+            }
+        });
 
     }
 
