@@ -50,14 +50,9 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         //If surfable use green arrow and ring else use red
         if(favorite.isSurfable()){
             //Start animation on imageviews
-
-            viewHolder.favoriteWindDirectionArrow.setImageDrawable(context.getDrawable(R.mipmap.ic_arrow_green));
+            viewHolder.favoriteWindDirectionArrow.setImageDrawable(context.getDrawable(R.drawable.arrow_green));
         }else{
-            /*
-            TODO:implement with correct image location
-            viewHolder.favoriteWindDirectionRing.setImageDrawable(context.getDrawable(R.mipmap.ic_direction_red));
-            viewHolder.favoriteWindDirectionArrow.setImageDrawable(context.getDrawable(R.mipmap.ic_arrow_red));
-            */
+            viewHolder.favoriteWindDirectionArrow.setImageDrawable(context.getDrawable(R.drawable.arrow_red));
         }
 
         //Set up button listeners for each card
@@ -106,9 +101,9 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     //Do animation of rotating both pictures to sesired angle from 0
     //Inspired by: http://www.learn-android-easily.com/2013/07/imageview-animation-in-android.html
     //animation setup for both icons
-    public void animateIcons(ViewHolder viewHolder, SurfLocation favorite){
-        RotateAnimation animRing = new RotateAnimation(0, 180, 120, 120);
-        RotateAnimation animArrow = new RotateAnimation(0, -130, 60, 60);
+    public void animateIcons(ViewHolder viewHolder, SurfLocation location){
+        RotateAnimation animRing = new RotateAnimation(0, location.getSurfDir(), 120, 120);
+        RotateAnimation animArrow = new RotateAnimation(0, -(360-location.getWindDir()), 60, 60);
         animRing.setInterpolator(new LinearInterpolator());
         animArrow.setInterpolator(new LinearInterpolator());
         animRing.setFillAfter(true);
