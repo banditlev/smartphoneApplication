@@ -1,5 +1,6 @@
 package dk.lalan.surfbuddy;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -205,6 +206,50 @@ public class SurfLocation {
             windString = "NW";
         }
         return windString;
+    }
+
+    public String getIdealWindString(){
+        String windString = "";
+        int wind = getSurfDir();
+        if(wind >= 337 || wind < 22){
+            windString = "N";
+        }
+        if(wind >= 22 && wind < 67){
+            windString = "NE";
+        }
+        if(wind >= 67 && wind < 112){
+            windString = "E";
+        }
+        if(wind >= 112 && wind < 157){
+            windString = "SE";
+        }
+        if(wind >= 157 && wind < 202){
+            windString = "S";
+        }
+        if(wind >= 202 && wind < 247){
+            windString = "SW";
+        }
+        if(wind >= 247 && wind < 292){
+            windString = "W";
+        }
+        if(wind >= 292 && wind < 337){
+            windString = "NW";
+        }
+        return windString;
+    }
+
+    public String getLevelString(Context context){
+        int level = getLevel();
+        switch (level){
+            case 0:
+                return context.getString(R.string.level_string_novice);
+            case 1:
+                return context.getString(R.string.level_string_intermediate);
+            case 2:
+                return context.getString(R.string.level_string_expert);
+            default:
+                return context.getString(R.string.level_string_unknown);
+        }
     }
 
     public String getJsonString(){

@@ -23,13 +23,14 @@ public class InformationFragment extends Fragment {
         TextView informationText = (TextView) view.findViewById(R.id.fragment_information_text);
         TextView difficultyLevel = (TextView) view.findViewById(R.id.difficulty_text);
         TextView idealDirection = (TextView) view.findViewById(R.id.ideal_direction);
-        //idealDirection.setText(surfLocation.getSurfDir());
-        crawlFile(informationText, difficultyLevel);
+        idealDirection.setText(surfLocation.getIdealWindString());
+        difficultyLevel.setText(surfLocation.getLevelString(view.getContext()));
+        crawlFile(informationText);
         return view;
     }
 
     //Crawl spot file and search for info using spot name
-    public void crawlFile(TextView info, TextView level){
+    public void crawlFile(TextView info){
         boolean dataFound = false;
         InputStream inputStream = this.getResources().openRawResource(R.raw.suftspots);
 
@@ -41,7 +42,6 @@ public class InformationFragment extends Fragment {
             while (( line = bufferedReader.readLine()) != null && !dataFound) {
                 String[] row = line.split(";");
                 if (row[0].contains(surfLocation.getName())){
-                    level.setText(row[4].trim());
                     info.setText(row[5].trim());
                     dataFound = true;
                 }
