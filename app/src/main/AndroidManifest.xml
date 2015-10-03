@@ -19,11 +19,7 @@
             <intent-filter>
                 <action android:name="WeatherService.WEATHER_UPDATE" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".BrowseActivity"
@@ -43,8 +39,13 @@
 
         <activity
             android:name=".LocationInformationActivity"
-            android:label="@string/title_activity_location_information" >
+            android:label="@string/title_activity_location_information"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
