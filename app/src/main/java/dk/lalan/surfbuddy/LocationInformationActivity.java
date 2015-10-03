@@ -8,16 +8,22 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LocationInformationActivity extends AppCompatActivity {
 
+    private SurfLocation surfLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_information);
+
+        surfLocation = new SurfLocation();
+        surfLocation.fillDataFromJson((getIntent().getStringExtra("surfLocation")));
 
         //Inspired by: http://www.androidrey.com/android-design-support-library-tablayout/
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
@@ -26,7 +32,7 @@ public class LocationInformationActivity extends AppCompatActivity {
         tabLayout.setElevation(12);
         tabLayout.setTabTextColors(getResources().getColor(R.color.tabbar_menu_dim), Color.WHITE);
 
-        setTitle("Klitmøller");
+        setTitle(surfLocation.getName());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
@@ -44,6 +50,10 @@ public class LocationInformationActivity extends AppCompatActivity {
         adapter.addFragment(new InformationFragment(), "Information");
         adapter.addFragment(new MapFragment(), "Map");
         viewPager.setAdapter(adapter);
+    }
+
+    public SurfLocation getSurfLocation() {
+        return surfLocation;
     }
 
     //Inspiration from: https://github.com/chrisbanes/cheesesquare

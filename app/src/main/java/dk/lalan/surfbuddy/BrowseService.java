@@ -89,10 +89,12 @@ public class BrowseService extends Service {
 
                 double wind = responseObj.getJSONObject("wind").getDouble("speed");
                 double temp = responseObj.getJSONObject("main").getDouble("temp");
+                String desc = responseObj.getJSONArray("weather").getJSONObject(0).getString("description");
 
                 sf.setWindDir(direction);
                 sf.setWindSpeed(wind);
                 sf.setTemperatur(temp);
+                sf.setDescribtion(desc);
 
                 surfLocation = new Location("");
                 surfLocation.setLongitude(sf.getLongitude());

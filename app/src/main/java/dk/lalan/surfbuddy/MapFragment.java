@@ -18,11 +18,12 @@ public class MapFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
         MapView map = (MapView) view.findViewById(R.id.mapview);
+        SurfLocation surfLocation = ((LocationInformationActivity) getActivity()).getSurfLocation();
 
         map.setBuiltInZoomControls(false);
         map.setMultiTouchControls(true);
         map.getController().setZoom(12);
-        map.getController().setCenter(new GeoPoint(55.57, 10.09));
+        map.getController().setCenter(new GeoPoint(surfLocation.getlatitude(), surfLocation.getLongitude()));
 
         return view;
     }

@@ -233,7 +233,7 @@ public class SurfLocation {
         return json.toString();
     }
 
-    public SurfLocation getInstance(String jsonString){
+    public void fillDataFromJson(String jsonString){
         JSONObject json = null;
         try {
             json = new JSONObject(jsonString);
@@ -253,7 +253,5 @@ public class SurfLocation {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        return this;
     }
 }
