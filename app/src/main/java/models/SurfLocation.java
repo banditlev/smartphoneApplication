@@ -1,26 +1,68 @@
 package models;
 
 /**
- * Created by lalan on 02/10/15.
+ * Created by lundtoft on 02/10/15.
  */
 public class SurfLocation {
-    public Double longitude, latetude, windSpeed, temperatur, waveHeight;
-    public String name, describtion, level;
-    public int surfWindFrom, surfwindTo;
-    public Boolean surfAble;
+    public long id;
+    public double longitude, latitude, windSpeed, temperatur, waveHeight;
+    public String name, describtion, locationDescription;
+    public int windDir, surfDir, level;
 
-    public SurfLocation(Double longitude, Double latetude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, String level, int surfWindFrom, int surfwindTo, Boolean surfAble) {
+    /**
+     * Constructor that fills all information
+     *  @param id
+     * @param longitude
+     * @param latitude
+     * @param windSpeed
+     * @param temperatur
+     * @param waveHeight
+     * @param name
+     * @param describtion
+     * @param level
+     * @param windDir
+     * @param surfDir
+     * @param locationDescription
+     */
+    public SurfLocation(long id, Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, int level, int windDir, int surfDir, String locationDescription) {
+        this.id = id;
         this.longitude = longitude;
-        this.latetude = latetude;
+        this.latitude = latitude;
         this.windSpeed = windSpeed;
         this.temperatur = temperatur;
         this.waveHeight = waveHeight;
         this.name = name;
         this.describtion = describtion;
         this.level = level;
-        this.surfWindFrom = surfWindFrom;
-        this.surfwindTo = surfwindTo;
-        this.surfAble = surfAble;
+        this.windDir = windDir;
+        this.surfDir = surfDir;
+        this.locationDescription = locationDescription;
+    }
+
+    /**
+     * Simple constructor that sets all variables to null
+     */
+    public SurfLocation(){
+        this.id = 0;
+        this.longitude = 0.0;
+        this.latitude = 0.0;
+        this.windSpeed = 0.0;
+        this.temperatur = 0.0;
+        this.waveHeight = 0.0;
+        this.name = null;
+        this.describtion = null;
+        this.level = 0;
+        this.windDir = 0;
+        this.surfDir = 0;
+        this.locationDescription = null;
+    }
+
+    public String getLocationDescription() {
+        return locationDescription;
+    }
+
+    public void setLocationDescription(String locationDescription) {
+        this.locationDescription = locationDescription;
     }
 
     public Double getLongitude() {
@@ -31,12 +73,12 @@ public class SurfLocation {
         this.longitude = longitude;
     }
 
-    public Double getLatetud() {
-        return latetude;
+    public Double getlatitude() {
+        return latitude;
     }
 
-    public void setLatetud(Double latetud) {
-        this.latetude = latetud;
+    public void setlatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public Double getWindSpeed() {
@@ -79,35 +121,35 @@ public class SurfLocation {
         this.describtion = describtion;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
-    public int getSurfWindFrom() {
-        return surfWindFrom;
+    public int getWindDir() {
+        return windDir;
     }
 
-    public void setSurfWindFrom(int surfWindFrom) {
-        this.surfWindFrom = surfWindFrom;
+    public void setWindDir(int surfWind) {
+        this.windDir = surfWind;
     }
 
-    public int getSurfwindTo() {
-        return surfwindTo;
+    public int getSurfDir() {
+        return surfDir;
     }
 
-    public void setSurfwindTo(int surfwindTo) {
-        this.surfwindTo = surfwindTo;
+    public void setSurfDir(int surfDir) {
+        this.surfDir = surfDir;
     }
 
-    public Boolean getSurfAble() {
-        return surfAble;
+    public long getId() {
+        return id;
     }
 
-    public void setSurfAble(Boolean surfAble) {
-        this.surfAble = surfAble;
+    public void setId(long id) {
+        this.id = id;
     }
 }
