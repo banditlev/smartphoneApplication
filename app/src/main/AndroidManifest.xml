@@ -28,6 +28,11 @@
             <intent-filter>
                 <action android:name="BrowseService.UPDATE_IS_COMMING" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <service
@@ -41,11 +46,7 @@
             android:name=".LocationInformationActivity"
             android:label="@string/title_activity_location_information"
             android:parentActivityName=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
