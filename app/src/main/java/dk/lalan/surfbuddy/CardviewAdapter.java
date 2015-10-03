@@ -22,7 +22,6 @@ import java.util.Locale;
  */
 //Inspired by: http://treyrobinson.net/blog/android-l-tutorials-part-3-recyclerview-and-cardview/
 public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHolder> {
-
     private List<SurfLocation> favorites;
     private int rowLayout;
     private Context context;
@@ -72,9 +71,7 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         viewHolder.cardviewMoreInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context , BrowseActivity.class);
-                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+
             }
         });
         animateIcons(viewHolder, favorite);

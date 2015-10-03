@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -66,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView.setAdapter(mAdapter);
 
         }else{
-
+            TextView warningText = (TextView) findViewById(R.id.background_text_warning);
+            warningText.setText("@strings/background_warning_text");
         }
         db.addLocation("Klitmøller", 120, 1, 55.57, 10.09);
         db.addLocation("Ahl", 60, 0, 57.01, 10.06);
@@ -77,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter(WeatherService.WEATHER_UPDATE);
         registerReceiver(receiver, intentFilter);
 
+        //Handle interaction with fab button
         FloatingActionButton myFab = (FloatingActionButton)  this.findViewById(R.id.myFAB);
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BrowseActivity.class);
-                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });

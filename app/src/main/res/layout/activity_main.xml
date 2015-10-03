@@ -30,7 +30,12 @@
             app:elevation="12dp"
             app:backgroundTint="@color/fab_red_color"
             />
+        <TextView
+            android:id="@+id/background_text_warning"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/divider_color"
+            android:layout_centerInParent="true"
+            />
     </RelativeLayout>
-
-
 </RelativeLayout>
