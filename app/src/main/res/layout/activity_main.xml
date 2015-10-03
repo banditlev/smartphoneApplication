@@ -36,6 +36,8 @@
             android:layout_height="match_parent"
             android:textColor="@color/divider_color"
             android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textSize="25dp"
             />
     </RelativeLayout>
 </RelativeLayout>

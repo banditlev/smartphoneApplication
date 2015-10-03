@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private CardviewAdapter mAdapter;
 
     public List<SurfLocation> favorites = new ArrayList<>();
+    public TextView warningText;
 
     private Database db;
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 if(!favorites.isEmpty()) {
                     mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, getApplicationContext());
                     mRecyclerView.setAdapter(mAdapter);
+                    warningText.setText("");
                 }
             }
 
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        warningText = (TextView) findViewById(R.id.background_text_warning);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -67,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView.setAdapter(mAdapter);
 
         }else{
-            TextView warningText = (TextView) findViewById(R.id.background_text_warning);
-            warningText.setText("@strings/background_warning_text");
+            warningText.setText(R.string.background_warning_text);
         }
         db.addLocation("Klitmøller", 120, 1, 55.57, 10.09);
         db.addLocation("Ahl", 60, 0, 57.01, 10.06);

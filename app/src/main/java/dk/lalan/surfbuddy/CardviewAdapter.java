@@ -71,7 +71,10 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         viewHolder.cardviewMoreInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context , LocationInformationActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("surfLocation", favorite.getJsonString());
+                context.startActivity(intent);
             }
         });
         animateIcons(viewHolder, favorite);

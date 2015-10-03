@@ -1,6 +1,69 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="dk.lalan.surfbuddy.InformationFragment">
+    android:layout_height="match_parent" tools:context="dk.lalan.surfbuddy.InformationFragment"
+    android:isScrollContainer="true">
 
+    <TextView
+        android:id="@+id/fragment_information_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/standard_text_color"
+        android:backgroundTint="@color/cardview_dark_background"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="20dp"
+        />
 
-</FrameLayout>
+    <TextView
+        android:layout_below="@id/fragment_information_text"
+        android:id="@+id/difficulty_label_information_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/information_fragment_difficulty_label"
+        android:textColor="@color/sub_title_card_color"
+        android:textSize="20dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/difficulty_label_information_fragment"
+        android:text="@string/information_fragment_ideal_direction_label"
+        android:textColor="@color/sub_title_card_color"
+        android:textSize="20dp"
+        android:id="@+id/ideal_direction_label"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
+        />
+    <TextView
+        android:id="@+id/difficulty_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/standard_text_color"
+        android:text="Intermediate"
+        android:layout_above="@+id/ideal_direction_label"
+        android:layout_toEndOf="@+id/difficulty_label_information_fragment" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/standard_text_color"
+        android:layout_below="@id/difficulty_text"
+        android:layout_toEndOf="@id/ideal_direction_label"
+        android:id="@+id/ideal_direction"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@id/ideal_direction_label"
+        android:id="@+id/cardviewDivider"
+        android:layout_height="50dp" />
+</RelativeLayout>
+</ScrollView>
