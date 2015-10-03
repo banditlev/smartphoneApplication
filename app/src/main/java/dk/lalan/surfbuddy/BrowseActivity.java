@@ -25,6 +25,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import models.SurfLocation;
 
@@ -36,7 +37,7 @@ public class BrowseActivity extends Activity {
     private RelativeLayout progress;
     private ProgressBar progressBar;
     private ArrayAdapter<SurfLocation> browserAdapter;
-    private ArrayList<SurfLocation> locations;
+    private List<SurfLocation> locations;
     private ServiceConnection con = new ServiceConnection() {
 
         @Override
@@ -94,6 +95,7 @@ public class BrowseActivity extends Activity {
 
     private void updateUI() {
         locations = mService.getLocations();
+        Collections.sort(locations, WindComparator);
         browserAdapter = new BrowseListAdapter(this, R.layout.activity_browse_listview_element, locations);
         listview.setAdapter(browserAdapter);
         progress.setVisibility(View.INVISIBLE);
@@ -146,8 +148,8 @@ public class BrowseActivity extends Activity {
 
         public int compare(SurfLocation sf1, SurfLocation sf2) {
 
-            double sf1Dist = sf1.dist;
-            double sf2Dist = sf2.dist;
+            double sf1Dist = sf1.getDistance();
+            double sf2Dist = sf2.getDistance();
 
             if(sf1Dist == sf2Dist){
                 return 0;
@@ -163,8 +165,8 @@ public class BrowseActivity extends Activity {
 
         public int compare(SurfLocation sf1, SurfLocation sf2) {
 
-            String sf1Name = sf1.name;
-            String sf2Name = sf2.name;
+            String sf1Name = sf1.getName();
+            String sf2Name = sf2.getName();
 
             return sf1Name.compareToIgnoreCase(sf2Name);
         }
@@ -174,8 +176,8 @@ public class BrowseActivity extends Activity {
 
         public int compare(SurfLocation sf1, SurfLocation sf2) {
 
-            double sf1Wind = sf1.windSpeed;
-            double sf2Wind = sf2.windSpeed;
+            double sf1Wind = sf1.getWindSpeed();
+            double sf2Wind = sf2.getWindSpeed();
 
             if(sf1Wind == sf2Wind){
                 return 0;
@@ -191,8 +193,8 @@ public class BrowseActivity extends Activity {
 
         public int compare(SurfLocation sf1, SurfLocation sf2) {
 
-            int sf1Level = sf1.level;
-            int sf2Level = sf2.level;
+            int sf1Level = sf1.getLevel();
+            int sf2Level = sf2.getLevel();
 
             if(sf1Level == sf1Level){
                 return 0;

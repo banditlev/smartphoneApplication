@@ -1,13 +1,15 @@
 package models;
 
+import android.util.Log;
+
 /**
  * Created by lundtoft on 02/10/15.
  */
 public class SurfLocation {
-    public long id;
-    public double longitude, latitude, windSpeed, temperatur, waveHeight;
-    public String name, describtion, locationDescription;
-    public int windDir, surfDir, level;
+    private long id;
+    private double longitude, latitude, windSpeed, temperatur, waveHeight, distance;
+    private String name, describtion, locationDescription;
+    private int windDir, surfDir, level;
 
     /**
      * Constructor that fills all information
@@ -24,7 +26,7 @@ public class SurfLocation {
      * @param surfDir
      * @param locationDescription
      */
-    public SurfLocation(long id, Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, int level, int windDir, int surfDir, String locationDescription) {
+    public SurfLocation(long id, Double longitude, Double latitude, Double windSpeed, Double temperatur, Double waveHeight, String name, String describtion, int level, int windDir, int surfDir, String locationDescription, double distance) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -37,6 +39,7 @@ public class SurfLocation {
         this.windDir = windDir;
         this.surfDir = surfDir;
         this.locationDescription = locationDescription;
+        this.distance = distance;
     }
 
     /**
@@ -55,6 +58,7 @@ public class SurfLocation {
         this.windDir = 0;
         this.surfDir = 0;
         this.locationDescription = null;
+        this.distance = 0.0;
     }
 
     public String getLocationDescription() {
@@ -151,5 +155,23 @@ public class SurfLocation {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public boolean isSurfable(){
+        int absDist = Math.abs(surfDir - windDir);
+
+        if(absDist < 30){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

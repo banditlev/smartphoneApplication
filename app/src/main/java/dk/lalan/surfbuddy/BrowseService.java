@@ -11,6 +11,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -20,6 +21,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import models.SurfLocation;
 
@@ -32,7 +34,7 @@ public class BrowseService extends Service {
     public static final String UPDATE_IS_COMMING = "dk.lalan.surfbuddy.browseservice.UPDATE_IS_COMMING";
     private final IBinder iBinder = new BrowseBinder();
     private Thread servicecallthread;
-    private ArrayList<SurfLocation> locations;
+    private List<SurfLocation> locations;
     private Location myLocation, surfLocation;
 
     @Override
@@ -46,49 +48,9 @@ public class BrowseService extends Service {
     }
 
     private void initLocations() {
-        locations = new ArrayList<>();
-        SurfLocation sf = new SurfLocation();
-        sf.longitude = 8.62;
-        sf.latitude = 57.12;
-        sf.name = "Klitmøller";
-        locations.add(sf);
+        SurfFileReader sfr = new SurfFileReader(getApplicationContext());
+        locations = sfr.getAllLocations();
 
-        sf = new SurfLocation();
-        sf.longitude = 10.31;
-        sf.latitude = 55.22;
-        sf.name = "Skæring";
-        locations.add(sf);
-
-
-        sf = new SurfLocation();
-        sf.longitude = 10.64;
-        sf.latitude = 56.17;
-        sf.name = "Ahl";
-        locations.add(sf);
-
-        sf = new SurfLocation();
-        sf.longitude = 8.48;
-        sf.latitude = 55.15;
-        sf.name = "Lakolk Surfstrand, Rømø";
-        locations.add(sf);
-
-        sf = new SurfLocation();
-        sf.longitude = 12.30;
-        sf.latitude = 56.13;
-        sf.name = "Gilleleje";
-        locations.add(sf);
-
-        sf = new SurfLocation();
-        sf.longitude = 8.13;
-        sf.latitude = 56.01;
-        sf.name = "Hvide Sande";
-        locations.add(sf);
-
-        sf = new SurfLocation();
-        sf.longitude = 12.64;
-        sf.latitude = 55.65;
-        sf.name = "Amager Strandpark";
-        locations.add(sf);
 
     }
 
@@ -106,7 +68,7 @@ public class BrowseService extends Service {
 
             for(SurfLocation sf : locations) {
 
-                URL url = new URL("http://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + sf.latitude + "&lon=" + sf.latitude);
+                URL url = new URL("http://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + sf.getlatitude() + "&lon=" + sf.getLongitude());
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
@@ -121,24 +83,30 @@ public class BrowseService extends Service {
 
                 JSONObject responseObj = new JSONObject(response.toString());
 
-                //int direction = (int) responseObj.getJSONObject("wind").getDouble("deg");
+                int direction;
+                try{
+                    direction = (int) responseObj.getJSONObject("wind").getDouble("deg");
+                }catch (JSONException e){
+                    direction = 0;
+                }
+
                 double wind = responseObj.getJSONObject("wind").getDouble("speed");
                 double temp = responseObj.getJSONObject("main").getDouble("temp");
 
-                //sf.setWindDir(direction);
-                sf.windSpeed = wind;
-                sf.temperatur = temp;
+                sf.setWindDir(direction);
+                sf.setWindSpeed(wind);
+                sf.setTemperatur(temp);
 
                 surfLocation = new Location("");
-                surfLocation.setLongitude(sf.longitude);
-                surfLocation.setLatitude(sf.latitude);
+                surfLocation.setLongitude(sf.getLongitude());
+                surfLocation.setLatitude(sf.getlatitude());
                 double dist = myLocation.distanceTo(surfLocation) / 1000;
                 dist = Math.round(dist * 100);
                 dist = dist / 100;
-                sf.dist = dist;
-                //sf.setDist(myLocation.distanceTo(surfLocation));
+                sf.setDistance(dist);
 
                 urlConnection.disconnect();
+                //break;
             }
             Intent i = new Intent(UPDATE_IS_COMMING);
             sendBroadcast(i);
@@ -148,7 +116,7 @@ public class BrowseService extends Service {
         }
     }
 
-    public ArrayList<SurfLocation> getLocations() {
+    public List<SurfLocation> getLocations() {
         return locations;
     }
 
