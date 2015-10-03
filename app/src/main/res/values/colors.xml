@@ -8,5 +8,6 @@
     <color name="divider_color">#dbdbdb</color>
     <color name="standard_text_color">#4a4a4a</color>
     <color name="sub_title_card_color">#878787</color>
-    <color name="fab_red_color">#cb0d12</color>
+    <color name="tabbar_menu_dim">#C9DDF5</color>
+    <color name="colorGreen">#84D402</color>
 </resources>
