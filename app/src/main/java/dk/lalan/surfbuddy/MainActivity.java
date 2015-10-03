@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         if(!favorites.isEmpty()){
             mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, this);
             mRecyclerView.setAdapter(mAdapter);
+
         }else{
 
         }
@@ -73,6 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
         IntentFilter intentFilter = new IntentFilter(WeatherService.WEATHER_UPDATE);
         registerReceiver(receiver, intentFilter);
+
+        FloatingActionButton myFab = (FloatingActionButton)  this.findViewById(R.id.myFAB);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BrowseActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
 
     }
 

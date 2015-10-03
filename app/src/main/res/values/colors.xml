@@ -8,4 +8,5 @@
     <color name="divider_color">#dbdbdb</color>
     <color name="standard_text_color">#4a4a4a</color>
     <color name="sub_title_card_color">#878787</color>
+    <color name="fab_red_color">#cb0d12</color>
 </resources>
