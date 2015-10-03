@@ -30,10 +30,25 @@ public class MainActivity extends Activity {
 
     public List<DummySurfer> favorites = new ArrayList<>();
 
+    private Database db;
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        //Inspiration: http://www.vogella.com/tutorials/AndroidServices/article.html
+        @Override
+        public void onReceive(Context context, Intent intent){
+            if(intent.getAction().equals(WeatherService.WEATHER_UPDATE)) {
+                for (SurfLocation sf : db.getAllLocations()) {
+                    Toast.makeText(MainActivity.this, sf.getDescribtion(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -49,6 +64,15 @@ public class MainActivity extends Activity {
 
         mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, this);
         mRecyclerView.setAdapter(mAdapter);
+
+        db = new Database(getApplicationContext());
+
+        Intent bgService = new Intent(getApplicationContext(), WeatherService.class);
+        startService(bgService);
+
+        IntentFilter intentFilter = new IntentFilter(WeatherService.WEATHER_UPDATE);
+        registerReceiver(receiver, intentFilter);
+
     }
 
     @Override
@@ -57,5 +81,4 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
 }
