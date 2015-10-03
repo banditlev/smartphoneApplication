@@ -32,7 +32,7 @@ public class Database {
         dbHelper.close();
     }
 
-    public long addLocation(String name, int idealDirection, String level, double lat, double lon){
+    public long addLocation(String name, int idealDirection, int level, double lat, double lon){
         open();
         Date date = new Date();
 

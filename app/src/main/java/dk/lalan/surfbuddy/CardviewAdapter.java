@@ -42,15 +42,15 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         final int row = i;
         viewHolder.favoriteName.setText(favorite.getName());
         viewHolder.favoriteDescription.setText(favorite.getDescribtion());
-        viewHolder.favoriteWindDirection.setText(favorite.getWindDir());
+        viewHolder.favoriteWindDirection.setText(Integer.toString(favorite.getWindDir()));
         viewHolder.favoriteTemp.setText(Double.toString(favorite.getTemperatur()) + "º C");
         viewHolder.favoriteWindSpeed.setText(Double.toString(favorite.getWindSpeed()) + " knots");
-
+        viewHolder.favoriteWindDirectionRing.setImageDrawable(context.getDrawable(R.mipmap.ic_direction_green));
 
         //If surfable use green arrow and ring else use red
         if(favorite.isSurfable()){
             //Start animation on imageviews
-            viewHolder.favoriteWindDirectionRing.setImageDrawable(context.getDrawable(R.mipmap.ic_direction_green));
+
             viewHolder.favoriteWindDirectionArrow.setImageDrawable(context.getDrawable(R.mipmap.ic_arrow_green));
         }else{
             /*

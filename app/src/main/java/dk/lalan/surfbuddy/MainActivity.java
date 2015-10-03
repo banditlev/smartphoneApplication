@@ -34,7 +34,13 @@ public class MainActivity extends Activity {
                 for (SurfLocation sf : db.getAllLocations()) {
                     Toast.makeText(MainActivity.this, sf.getDescribtion(), Toast.LENGTH_SHORT).show();
                 }
+                favorites = db.getAllLocations();
+                if(!favorites.isEmpty()) {
+                    mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, getApplicationContext());
+                    mRecyclerView.setAdapter(mAdapter);
+                }
             }
+
         }
     };
 
@@ -47,10 +53,17 @@ public class MainActivity extends Activity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, this);
-        mRecyclerView.setAdapter(mAdapter);
-
         db = new Database(getApplicationContext());
+        db.clearDB();
+        favorites = db.getAllLocations();
+
+        if(!favorites.isEmpty()){
+            mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, this);
+            mRecyclerView.setAdapter(mAdapter);
+        }else{
+
+        }
+        db.addLocation("Klitmøller", 120, 1, 55.57, 10.09);
 
         Intent bgService = new Intent(getApplicationContext(), WeatherService.class);
         startService(bgService);
