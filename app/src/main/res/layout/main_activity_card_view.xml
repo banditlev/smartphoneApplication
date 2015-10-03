@@ -108,26 +108,32 @@
             android:layout_height="1dp"
             android:background="@color/divider_color"/>
         <TextView
+            android:id="@+id/cardviewNavigateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cardviewDivider"
-            android:paddingLeft="20dp"
+            android:paddingLeft="15dp"
             android:paddingTop="18dp"
             android:text="@string/navigate_action_button_text"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:backgroundTint="@color/cardview_light_background"
+            />
         <TextView
+            android:id="@+id/carviewMoreInfoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/cardviewDivider"
             android:layout_below="@id/cardviewDivider"
             android:text="@string/more_info_action_button_text"
             android:paddingTop="18dp"
-            android:paddingRight="20dp"
+            android:paddingRight="15dp"
             android:textSize="15dp"
             android:textStyle="bold"
-            android:textColor="@color/sub_title_card_color"/>
+            android:textColor="@color/sub_title_card_color"
+            android:backgroundTint="@color/cardview_light_background"
+            />
         <ImageView
             android:id="@+id/favoriteWindDirectionRing"
             android:layout_width="120dp"
