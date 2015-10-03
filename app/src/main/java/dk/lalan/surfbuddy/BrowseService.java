@@ -47,13 +47,49 @@ public class BrowseService extends Service {
 
     private void initLocations() {
         locations = new ArrayList<>();
-        locations.add(new SurfLocation(0, 8.62, 57.12, 0.0, 0.0, 0.0, "Klitmøller", null, null, 0, 0));
-        locations.add(new SurfLocation(0, 10.31, 55.22, 0.0, 0.0, 0.0, "Skæring", null, null, 0, 0));
-        locations.add(new SurfLocation(0, 10.64, 56.17, 0.0, 0.0, 0.0, "Ahl", null, null, 0, 0));
-        locations.add(new SurfLocation(0, 8.48, 55.15, 0.0, 0.0, 0.0, "Lakolk Surfstrand, Rømø", null, null, 0, 0));
-        locations.add(new SurfLocation(0, 12.30, 56.13, 0.0, 0.0, 0.0, "Gilleleje", null, null, 0, 0));
-        locations.add(new SurfLocation(0, 8.13, 56.01, 0.0, 0.0, 0.0, "Hvide Sande", null, null, 0, 0));
-        locations.add(new SurfLocation(0, 12.64, 55.65, 0.0, 0.0, 0.0, "Amager Strandpark", null, null, 0, 0));
+        SurfLocation sf = new SurfLocation();
+        sf.longitude = 8.62;
+        sf.latitude = 57.12;
+        sf.name = "Klitmøller";
+        locations.add(sf);
+
+        sf = new SurfLocation();
+        sf.longitude = 10.31;
+        sf.latitude = 55.22;
+        sf.name = "Skæring";
+        locations.add(sf);
+
+
+        sf = new SurfLocation();
+        sf.longitude = 10.64;
+        sf.latitude = 56.17;
+        sf.name = "Ahl";
+        locations.add(sf);
+
+        sf = new SurfLocation();
+        sf.longitude = 8.48;
+        sf.latitude = 55.15;
+        sf.name = "Lakolk Surfstrand, Rømø";
+        locations.add(sf);
+
+        sf = new SurfLocation();
+        sf.longitude = 12.30;
+        sf.latitude = 56.13;
+        sf.name = "Gilleleje";
+        locations.add(sf);
+
+        sf = new SurfLocation();
+        sf.longitude = 8.13;
+        sf.latitude = 56.01;
+        sf.name = "Hvide Sande";
+        locations.add(sf);
+
+        sf = new SurfLocation();
+        sf.longitude = 12.64;
+        sf.latitude = 55.65;
+        sf.name = "Amager Strandpark";
+        locations.add(sf);
+
     }
 
     public void startFetcher() {
@@ -70,7 +106,7 @@ public class BrowseService extends Service {
 
             for(SurfLocation sf : locations) {
 
-                URL url = new URL("http://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + sf.getlatitude() + "&lon=" + sf.getLongitude());
+                URL url = new URL("http://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + sf.latitude + "&lon=" + sf.latitude);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
@@ -90,16 +126,16 @@ public class BrowseService extends Service {
                 double temp = responseObj.getJSONObject("main").getDouble("temp");
 
                 //sf.setWindDir(direction);
-                sf.setWindSpeed(wind);
-                sf.setTemperatur(temp);
+                sf.windSpeed = wind;
+                sf.temperatur = temp;
 
                 surfLocation = new Location("");
-                surfLocation.setLongitude(sf.getLongitude());
-                surfLocation.setLatitude(sf.getlatitude());
+                surfLocation.setLongitude(sf.longitude);
+                surfLocation.setLatitude(sf.latitude);
                 double dist = myLocation.distanceTo(surfLocation) / 1000;
                 dist = Math.round(dist * 100);
                 dist = dist / 100;
-                sf.setDist(dist);
+                sf.dist = dist;
                 //sf.setDist(myLocation.distanceTo(surfLocation));
 
                 urlConnection.disconnect();

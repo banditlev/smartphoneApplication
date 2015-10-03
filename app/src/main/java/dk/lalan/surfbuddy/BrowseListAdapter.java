@@ -46,9 +46,9 @@ public class BrowseListAdapter extends ArrayAdapter<SurfLocation> {
 
         SurfLocation surfLocation = data.get(position);
 
-        holder.locationName.setText(surfLocation.getName());
-        holder.windSpeed.setText(surfLocation.getWindSpeed().toString() + " knots");
-        holder.dist.setText(surfLocation.getDist() + " km");
+        holder.locationName.setText(surfLocation.name);
+        holder.windSpeed.setText(surfLocation.windSpeed + " knots");
+        holder.dist.setText(surfLocation.dist + " km");
 
         return row;
     }

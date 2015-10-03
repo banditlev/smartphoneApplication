@@ -57,8 +57,6 @@ public class BrowseActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if(intent.getAction().compareTo(mService.UPDATE_IS_COMMING) == 0){
-                //SetStuff
-                //Toast.makeText(getApplicationContext(), "Update Received", Toast.LENGTH_SHORT).show();
                 updateUI();
 
             }
@@ -137,7 +135,6 @@ public class BrowseActivity extends Activity {
                 Toast.makeText(getApplicationContext(),"refresh", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.browse_action_search:
-                Toast.makeText(getApplicationContext(),"search", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -149,8 +146,8 @@ public class BrowseActivity extends Activity {
 
         public int compare(SurfLocation sf1, SurfLocation sf2) {
 
-            double sf1Dist = sf1.getDist();
-            double sf2Dist = sf2.getDist();
+            double sf1Dist = sf1.dist;
+            double sf2Dist = sf2.dist;
 
             if(sf1Dist == sf2Dist){
                 return 0;
@@ -166,8 +163,8 @@ public class BrowseActivity extends Activity {
 
         public int compare(SurfLocation sf1, SurfLocation sf2) {
 
-            String sf1Name = sf1.getName();
-            String sf2Name = sf2.getName();
+            String sf1Name = sf1.name;
+            String sf2Name = sf2.name;
 
             return sf1Name.compareToIgnoreCase(sf2Name);
         }
@@ -177,8 +174,8 @@ public class BrowseActivity extends Activity {
 
         public int compare(SurfLocation sf1, SurfLocation sf2) {
 
-            double sf1Wind = sf1.getWindSpeed();
-            double sf2Wind = sf2.getWindSpeed();
+            double sf1Wind = sf1.windSpeed;
+            double sf2Wind = sf2.windSpeed;
 
             if(sf1Wind == sf2Wind){
                 return 0;
@@ -194,8 +191,8 @@ public class BrowseActivity extends Activity {
 
         public int compare(SurfLocation sf1, SurfLocation sf2) {
 
-            int sf1Level = sf1.getLevel();
-            int sf2Level = sf2.getLevel();
+            int sf1Level = sf1.level;
+            int sf2Level = sf2.level;
 
             if(sf1Level == sf1Level){
                 return 0;
