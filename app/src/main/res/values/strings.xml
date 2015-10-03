@@ -13,4 +13,10 @@
     <string name="level_beginner">Beginner</string>
     <string name="title_activity_location_information">LocationInformationActivity</string>
     <string name="background_warning_text">No favorites adde yet...</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="last_updated">Last updated:</string>
+    <string name="knots">knots</string>
+    <string name="conditions_is">"Conditions is "</string>
 </resources>
