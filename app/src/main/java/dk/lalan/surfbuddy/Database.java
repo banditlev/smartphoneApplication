@@ -110,7 +110,7 @@ public class Database {
             long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_ID)));
             String update = cursor.getString(cursor.getColumnIndex(dbHelper.SURF_TIME));
 
-            update = new SimpleDateFormat("EEE, HH:mm").format(update);
+            update = new SimpleDateFormat("EEE, HH:mm").format(new Date(update));
             locations.add(new SurfLocation(id, longitude, latitude, windSpeed, temperature, waveHeight, name, description, level, windDir, surfDir, "", 0, update));
         }
 

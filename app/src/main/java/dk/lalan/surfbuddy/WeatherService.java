@@ -2,6 +2,7 @@ package dk.lalan.surfbuddy;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -62,17 +63,17 @@ public class WeatherService extends IntentService {
                     response.append(line);
                 }
 
-                //Log.i("****", response.toString());
+                //Log.i("****HWAR", response.toString());
 
                 JSONObject responseObj = new JSONObject(response.toString());
 
                 int direction = (int) responseObj.getJSONObject("wind").getDouble("deg");
                 double wind = responseObj.getJSONObject("wind").getDouble("speed");
                 double temp = responseObj.getJSONObject("main").getDouble("temp");
-                double waveHeight = responseObj.getJSONObject("main").getDouble("sea_level");
+                //double waveHeight = responseObj.getJSONObject("main").getDouble("sea_level");
                 String desc = responseObj.getJSONArray("weather").getJSONObject(0).getString("description");
 
-                db.updateLocation(sf.getId(), direction, wind, temp, waveHeight, desc);
+                db.updateLocation(sf.getId(), direction, wind, temp, 0.0, desc);
 
                 urlConnection.disconnect();
             }

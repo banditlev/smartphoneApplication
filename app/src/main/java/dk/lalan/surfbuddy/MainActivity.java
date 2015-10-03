@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         db = new Database(getApplicationContext());
-        db.clearDB();
+
         favorites = db.getAllLocations();
 
         if(!favorites.isEmpty()){
@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             warningText.setText(R.string.background_warning_text);
         }
-        db.addLocation("Klitmøller", 120, 1, 55.57, 10.09);
-        db.addLocation("Ahl", 60, 0, 57.01, 10.06);
 
         Intent bgService = new Intent(getApplicationContext(), WeatherService.class);
         startService(bgService);
