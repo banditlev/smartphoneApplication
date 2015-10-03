@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import models.SurfLocation;
-
 /**
  * Created by lundtoft on 02/10/15.
  */
@@ -104,11 +102,11 @@ public class Database {
             double waveHeight = Double.parseDouble(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_WAVE_HEIGHT)));
             String name = cursor.getString(cursor.getColumnIndex(dbHelper.SURF_NAME));
             String description = cursor.getString(cursor.getColumnIndex(dbHelper.SURF_DESCRIPTION));
-            String level = cursor.getString(cursor.getColumnIndex(dbHelper.SURF_LEVEL));
+            int level = Integer.parseInt(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_LEVEL)));
             int windDir = Integer.parseInt(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_DIRECTION)));
             int surfDir = Integer.parseInt(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_IDEAL_DIRECTION)));
             long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(dbHelper.SURF_ID)));
-            locations.add(new SurfLocation(id, longitude, latitude, windSpeed, temperature, waveHeight, name, description, level, windDir, surfDir));
+            locations.add(new SurfLocation(id, longitude, latitude, windSpeed, temperature, waveHeight, name, description, level, windDir, surfDir, "", 0));
         }
 
         cursor.close();

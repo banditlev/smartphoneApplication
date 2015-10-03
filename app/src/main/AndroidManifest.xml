@@ -14,11 +14,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/mainActivityTitle" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter>
                    <action android:name="WeatherService.WEATHER_UPDATE" />
             </intent-filter>
@@ -30,7 +26,11 @@
             <intent-filter>
                 <action android:name="BrowseService.UPDATE_IS_COMMING"/>
             </intent-filter>
-            </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <service
             android:name=".WeatherService"

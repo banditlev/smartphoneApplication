@@ -1,4 +1,4 @@
-package models;
+package dk.lalan.surfbuddy;
 
 import android.util.Log;
 

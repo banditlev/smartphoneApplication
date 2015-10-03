@@ -34,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE "+TABLE_SURF+" (" + SURF_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SURF_NAME + " VARCHAR(500), " + SURF_DESCRIPTION + " VARCHAR(1000), " + SURF_TIME + " VARCHAR(100), " + SURF_DIRECTION + " INTEGER, " + SURF_WIND + " DOUBLE, " + SURF_TEMP + " DOUBLE, " + SURF_IDEAL_DIRECTION + " INTEGER, " + SURF_WAVE_HEIGHT + " DOUBLE, " + SURF_LEVEL + " VARCHAR(500), " + SURF_LAT + " DOUBLE, " + SURF_LON + " DOUBLE)";
+        String query = "CREATE TABLE "+TABLE_SURF+" (" + SURF_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SURF_NAME + " VARCHAR(500), " + SURF_DESCRIPTION + " VARCHAR(1000), " + SURF_TIME + " VARCHAR(100), " + SURF_DIRECTION + " INTEGER, " + SURF_WIND + " DOUBLE, " + SURF_TEMP + " DOUBLE, " + SURF_IDEAL_DIRECTION + " INTEGER, " + SURF_WAVE_HEIGHT + " DOUBLE, " + SURF_LEVEL + " INTEGER, " + SURF_LAT + " DOUBLE, " + SURF_LON + " DOUBLE)";
         db.execSQL(query);
     }
 

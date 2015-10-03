@@ -1,27 +1,18 @@
-package adapters;
+package dk.lalan.surfbuddy;
 
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Debug;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.view.View;
 import android.view.LayoutInflater;
-import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
-
-import dk.lalan.surfbuddy.R;
-import models.DummySurfer;
-import models.SurfLocation;
 
 /**
  * Created by banditlev on 02/10/15.
@@ -29,11 +20,11 @@ import models.SurfLocation;
 //Inspired by: http://treyrobinson.net/blog/android-l-tutorials-part-3-recyclerview-and-cardview/
 public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHolder> {
 
-    private List<DummySurfer> favorites;
+    private List<SurfLocation> favorites;
     private int rowLayout;
     private Context context;
 
-    public CardviewAdapter(List<DummySurfer> favorites, int rowLayout, Context _context){
+    public CardviewAdapter(List<SurfLocation> favorites, int rowLayout, Context _context){
         this.favorites = favorites;
         this.rowLayout = rowLayout;
         this.context = _context;
@@ -47,12 +38,12 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i){
-        DummySurfer favorite = favorites.get(i);
+        SurfLocation favorite = favorites.get(i);
         final int row = i;
         viewHolder.favoriteName.setText(favorite.getName());
-        viewHolder.favoriteDescription.setText(favorite.getDescription());
-        viewHolder.favoriteWindDirection.setText(favorite.getWindDirection());
-        viewHolder.favoriteTemp.setText(Double.toString(favorite.getTemp()) + "º C");
+        viewHolder.favoriteDescription.setText(favorite.getDescribtion());
+        viewHolder.favoriteWindDirection.setText(favorite.getWindDir());
+        viewHolder.favoriteTemp.setText(Double.toString(favorite.getTemperatur()) + "º C");
         viewHolder.favoriteWindSpeed.setText(Double.toString(favorite.getWindSpeed()) + " knots");
 
 
@@ -115,7 +106,7 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     //Do animation of rotating both pictures to sesired angle from 0
     //Inspired by: http://www.learn-android-easily.com/2013/07/imageview-animation-in-android.html
     //animation setup for both icons
-    public void animateIcons(ViewHolder viewHolder, DummySurfer favorite){
+    public void animateIcons(ViewHolder viewHolder, SurfLocation favorite){
         RotateAnimation animRing = new RotateAnimation(0, 180, 120, 120);
         RotateAnimation animArrow = new RotateAnimation(0, -130, 60, 60);
         animRing.setInterpolator(new LinearInterpolator());

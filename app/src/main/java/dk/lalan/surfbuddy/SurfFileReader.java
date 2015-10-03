@@ -1,20 +1,13 @@
 package dk.lalan.surfbuddy;
 
 import android.content.Context;
-import android.os.Environment;
-import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
-import models.SurfLocation;
 
 /**
  * Created by lundtoft on 03/10/15.
