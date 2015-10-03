@@ -7,5 +7,6 @@
     <string name="browse_action_distance">Distance</string>
     <string name="browse_action_level">Level</string>
     <string name="browse_action_wind">Wind</string>
+    <string name="browse_action_alphabetic">Alphabetic</string>
 
 </resources>

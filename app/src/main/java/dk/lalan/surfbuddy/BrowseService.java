@@ -38,9 +38,10 @@ public class BrowseService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         initLocations();
-        myLocation = new Location("");
-        myLocation.setLatitude(56.15);
-        myLocation.setLongitude(10.17);
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        myLocation = lm.getLastKnownLocation
+                (LocationManager.GPS_PROVIDER);
+        Log.i("***", "LOCATION - long: " + myLocation.getLongitude() + " lat: " + myLocation.getLatitude());
         return iBinder;
     }
 
@@ -48,10 +49,14 @@ public class BrowseService extends Service {
         locations = new ArrayList<>();
         locations.add(new SurfLocation(0, 8.62, 57.12, 0.0, 0.0, 0.0, "Klitmøller", null, null, 0, 0));
         locations.add(new SurfLocation(0, 10.31, 55.22, 0.0, 0.0, 0.0, "Skæring", null, null, 0, 0));
+        locations.add(new SurfLocation(0, 10.64, 56.17, 0.0, 0.0, 0.0, "Ahl", null, null, 0, 0));
+        locations.add(new SurfLocation(0, 8.48, 55.15, 0.0, 0.0, 0.0, "Lakolk Surfstrand, Rømø", null, null, 0, 0));
+        locations.add(new SurfLocation(0, 12.30, 56.13, 0.0, 0.0, 0.0, "Gilleleje", null, null, 0, 0));
+        locations.add(new SurfLocation(0, 8.13, 56.01, 0.0, 0.0, 0.0, "Hvide Sande", null, null, 0, 0));
+        locations.add(new SurfLocation(0, 12.64, 55.65, 0.0, 0.0, 0.0, "Amager Strandpark", null, null, 0, 0));
     }
 
     public void startFetcher() {
-        Log.e("***", "TEST");
         servicecallthread = new Thread() {
             public void run() {
                 fetchWeather();
@@ -80,20 +85,20 @@ public class BrowseService extends Service {
 
                 JSONObject responseObj = new JSONObject(response.toString());
 
-                int direction = (int) responseObj.getJSONObject("wind").getDouble("deg");
+                //int direction = (int) responseObj.getJSONObject("wind").getDouble("deg");
                 double wind = responseObj.getJSONObject("wind").getDouble("speed");
                 double temp = responseObj.getJSONObject("main").getDouble("temp");
-                double waveHeight = responseObj.getJSONObject("main").getDouble("sea_level");
 
-                sf.setWindDir(direction);
+                //sf.setWindDir(direction);
                 sf.setWindSpeed(wind);
                 sf.setTemperatur(temp);
-                sf.setWaveHeight(waveHeight);
 
                 surfLocation = new Location("");
                 surfLocation.setLongitude(sf.getLongitude());
                 surfLocation.setLatitude(sf.getlatitude());
-                double dist = Math.round(myLocation.distanceTo(surfLocation) / 1000);
+                double dist = myLocation.distanceTo(surfLocation) / 1000;
+                dist = Math.round(dist * 100);
+                dist = dist / 100;
                 sf.setDist(dist);
                 //sf.setDist(myLocation.distanceTo(surfLocation));
 

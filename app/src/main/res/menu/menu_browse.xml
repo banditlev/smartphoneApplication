@@ -1,6 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" tools:context="dk.lalan.surfbuddy.BrowseActivity">
 
+    <item android:id="@+id/browse_action_alphabetic" android:title="@string/browse_action_alphabetic"
+        android:orderInCategory="100" android:showAsAction="never" />
+
     <item android:id="@+id/browse_action_distance" android:title="@string/browse_action_distance"
         android:orderInCategory="100" android:showAsAction="never" />
 
