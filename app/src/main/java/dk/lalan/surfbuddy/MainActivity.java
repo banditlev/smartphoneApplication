@@ -64,6 +64,7 @@ public class MainActivity extends Activity {
 
         }
         db.addLocation("Klitmøller", 120, 1, 55.57, 10.09);
+        db.addLocation("Ahl", 60, 0, 57.01, 10.06);
 
         Intent bgService = new Intent(getApplicationContext(), WeatherService.class);
         startService(bgService);

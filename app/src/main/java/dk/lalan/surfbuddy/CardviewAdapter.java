@@ -48,11 +48,10 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         viewHolder.favoriteWindDirection.setText(favorite.getWindDirString());
         viewHolder.favoriteTemp.setText(Double.toString(favorite.getTemperatur()) + "º C");
         viewHolder.favoriteWindSpeed.setText(Double.toString(favorite.getWindSpeed()) + " knots");
-        viewHolder.favoriteWindDirectionRing.setImageDrawable(context.getDrawable(R.mipmap.ic_direction_green));
+        viewHolder.favoriteWindDirectionRing.setImageDrawable(context.getDrawable(R.drawable.direction_neutral));
 
         //If surfable use green arrow and ring else use red
         if(favorite.isSurfable()){
-            //Start animation on imageviews
             viewHolder.favoriteWindDirectionArrow.setImageDrawable(context.getDrawable(R.drawable.arrow_green));
         }else{
             viewHolder.favoriteWindDirectionArrow.setImageDrawable(context.getDrawable(R.drawable.arrow_red));
@@ -62,7 +61,6 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         viewHolder.cardviewNavigationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Button click Nav " + row, Toast.LENGTH_SHORT).show();
                 //Start google maps
                 String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", favorite.getlatitude(), favorite.getLongitude(), "Surf spot - " + favorite.getName());
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
@@ -71,19 +69,15 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
                 context.startActivity(intent);
             }
         });
-
         viewHolder.cardviewMoreInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Button click More " + row, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context , BrowseActivity.class);
                 intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
-
         animateIcons(viewHolder, favorite);
-
     }
 
     @Override
@@ -115,7 +109,7 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     //animation setup for both icons
     public void animateIcons(ViewHolder viewHolder, SurfLocation location){
         RotateAnimation animRing = new RotateAnimation(0, location.getSurfDir(), 120, 120);
-        RotateAnimation animArrow = new RotateAnimation(0, -(360-location.getWindDir()), 60, 60);
+        RotateAnimation animArrow = new RotateAnimation(0, -(360-location.getWindDir()), 50, 50);
         animRing.setInterpolator(new LinearInterpolator());
         animArrow.setInterpolator(new LinearInterpolator());
         animRing.setFillAfter(true);

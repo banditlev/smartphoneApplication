@@ -198,7 +198,7 @@ public class SurfLocation {
         if(wind >= 247 && wind < 292){
             windString = "W";
         }
-        if(wind <= 292 && wind < 337){
+        if(wind >= 292 && wind < 337){
             windString = "NW";
         }
         return windString;

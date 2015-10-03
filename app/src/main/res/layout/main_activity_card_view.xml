@@ -144,11 +144,11 @@
             android:layout_alignRight="@id/cardviewDivider" />
         <ImageView
             android:id="@+id/favoriteWindDirectionArrow"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_above="@id/cardviewDivider"
-            android:layout_marginRight="60dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginBottom="55dp"
             android:layout_alignRight="@id/cardviewDivider"
             />
 
