@@ -2,6 +2,7 @@ package dk.lalan.surfbuddy;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class BrowseListAdapter extends ArrayAdapter<SurfLocation> {
             holder = (ViewHolder) row.getTag();
         }
 
-        SurfLocation surfLocation = data.get(position);
+        final SurfLocation surfLocation = data.get(position);
 
         holder.locationName.setText(surfLocation.getName());
         holder.windSpeed.setText(surfLocation.getWindSpeed() + " knots");
@@ -63,6 +64,16 @@ public class BrowseListAdapter extends ArrayAdapter<SurfLocation> {
         animArrow.setFillAfter(true);
         animArrow.setDuration(1000);
         holder.windDirection.startAnimation(animArrow);
+
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context , LocationInformationActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("surfLocation", surfLocation.getJsonString());
+                context.startActivity(intent);
+            }
+        });
 
         return row;
     }

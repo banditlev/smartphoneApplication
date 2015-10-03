@@ -2,6 +2,9 @@ package dk.lalan.surfbuddy;
 
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by lundtoft on 02/10/15.
  */
@@ -52,12 +55,12 @@ public class SurfLocation {
         this.windSpeed = 0.0;
         this.temperatur = 0.0;
         this.waveHeight = 0.0;
-        this.name = null;
-        this.describtion = null;
+        this.name = "";
+        this.describtion = "";
         this.level = 0;
         this.windDir = 0;
         this.surfDir = 0;
-        this.locationDescription = null;
+        this.locationDescription = "";
         this.distance = 0.0;
     }
 
@@ -202,5 +205,55 @@ public class SurfLocation {
             windString = "NW";
         }
         return windString;
+    }
+
+    public String getJsonString(){
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("id", id);
+            json.put("longitude", longitude);
+            json.put("latitude", latitude);
+            json.put("windSpeed", windSpeed);
+            json.put("temperatur", temperatur);
+            json.put("waveHeight", waveHeight);
+            json.put("name", name);
+            json.put("describtion", describtion);
+            json.put("level", level);
+            json.put("windDir", windDir);
+            json.put("surfDir", surfDir);
+            json.put("locationDescription", locationDescription);
+            json.put("distance", distance);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return json.toString();
+    }
+
+    public SurfLocation getInstance(String jsonString){
+        JSONObject json = null;
+        try {
+            json = new JSONObject(jsonString);
+            this.id = json.getInt("id");
+            this.longitude = json.getDouble("longitude");
+            this.latitude = json.getDouble("latitude");
+            this.windSpeed = json.getDouble("windSpeed");
+            this.temperatur = json.getDouble("temperatur");
+            this.waveHeight = json.getDouble("waveHeight");
+            this.name = json.getString("name");
+            this.describtion = json.getString("describtion");
+            this.level = json.getInt("level");
+            this.windDir = json.getInt("windDir");
+            this.surfDir = json.getInt("surfDir");
+            this.locationDescription = json.getString("describtion");
+            this.distance = json.getDouble("distance");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return this;
     }
 }
