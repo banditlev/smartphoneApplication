@@ -3,8 +3,11 @@ package dk.lalan.surfbuddy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Matrix;
+import android.graphics.RectF;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.view.View;
 import android.view.LayoutInflater;
@@ -60,7 +63,6 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         viewHolder.cardviewNavigationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Start google maps
                 //Inspired by: http://stackoverflow.com/questions/2662531/launching-google-maps-directions-via-an-intent-on-android
                 String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", favorite.getlatitude(), favorite.getLongitude(), "Surf spot - " + favorite.getName());
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
@@ -78,6 +80,7 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
                 context.startActivity(intent);
             }
         });
+
         animateIcons(viewHolder, favorite);
     }
 
@@ -109,8 +112,14 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     //Inspired by: http://www.learn-android-easily.com/2013/07/imageview-animation-in-android.html
     //animation setup for both icons
     public void animateIcons(ViewHolder viewHolder, SurfLocation location){
-        RotateAnimation animRing = new RotateAnimation(0, location.getSurfDir(), 120, 120);
-        RotateAnimation animArrow = new RotateAnimation(0, -(360-location.getWindDir()), 50, 50);
+        float arrowHeight = viewHolder.favoriteWindDirectionArrow.getLayoutParams().height / 2;
+        float arrowWidth = viewHolder.favoriteWindDirectionArrow.getLayoutParams().width / 2;
+        float ringHeight = viewHolder.favoriteWindDirectionRing.getLayoutParams().height / 2;
+        float ringArrow = viewHolder.favoriteWindDirectionRing.getLayoutParams().width / 2;
+
+        RotateAnimation animRing = new RotateAnimation(0, location.getSurfDir(), ringHeight, ringArrow);
+        RotateAnimation animArrow = new RotateAnimation(0, -(360-location.getWindDir()), arrowHeight,  arrowWidth);
+
         animRing.setInterpolator(new LinearInterpolator());
         animArrow.setInterpolator(new LinearInterpolator());
         animRing.setFillAfter(true);

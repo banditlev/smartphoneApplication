@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         db = new Database(getApplicationContext());
         //db.clearDB();
         favorites = db.getAllLocations();
-        
+
         if(!favorites.isEmpty()){
             mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, this);
             mRecyclerView.setAdapter(mAdapter);
