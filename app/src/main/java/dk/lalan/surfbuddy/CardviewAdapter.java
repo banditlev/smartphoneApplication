@@ -49,7 +49,7 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         viewHolder.favoriteWindSpeed.setText(Double.toString(favorite.getWindSpeed()) + " knots");
         viewHolder.favoriteWindDirectionRing.setImageDrawable(context.getDrawable(R.drawable.direction_neutral));
 
-        //If surfable use green arrow and ring else use red
+        //If surfable use green arrow else use red
         if(favorite.isSurfable()){
             viewHolder.favoriteWindDirectionArrow.setImageDrawable(context.getDrawable(R.drawable.arrow_green));
         }else{
@@ -61,6 +61,7 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 //Start google maps
+                //Inspired by: http://stackoverflow.com/questions/2662531/launching-google-maps-directions-via-an-intent-on-android
                 String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", favorite.getlatitude(), favorite.getLongitude(), "Surf spot - " + favorite.getName());
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

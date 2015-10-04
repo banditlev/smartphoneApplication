@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent){
             if(intent.getAction().equals(WeatherService.WEATHER_UPDATE)) {
                 for (SurfLocation sf : db.getAllLocations()) {
-                    //Toast.makeText(MainActivity.this, sf.getDescribtion(), Toast.LENGTH_SHORT).show();
                 }
                 favorites = db.getAllLocations();
                 if(!favorites.isEmpty()) {
@@ -63,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         db = new Database(getApplicationContext());
 
         favorites = db.getAllLocations();
+
+        db.addLocation("Klitmøller", 120, 1, 56.75, 10.09);
 
         if(!favorites.isEmpty()){
             mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, this);
