@@ -29,7 +29,8 @@
         <activity
             android:name=".BrowseActivity"
             android:label="@string/title_activity_browse"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="BrowseService.UPDATE_IS_COMMING" />
             </intent-filter>

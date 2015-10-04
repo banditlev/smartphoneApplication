@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent){
             if(intent.getAction().equals(WeatherService.WEATHER_UPDATE)) {
-                for (SurfLocation sf : db.getAllLocations()) {
-                }
                 favorites = db.getAllLocations();
                 if(!favorites.isEmpty()) {
                     mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, getApplicationContext());
@@ -60,11 +58,9 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         db = new Database(getApplicationContext());
-
+        //db.clearDB();
         favorites = db.getAllLocations();
-
-        db.addLocation("Klitmøller", 120, 1, 56.75, 10.09);
-
+        
         if(!favorites.isEmpty()){
             mAdapter = new CardviewAdapter(favorites, R.layout.main_activity_card_view, this);
             mRecyclerView.setAdapter(mAdapter);
@@ -72,12 +68,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             warningText.setText(R.string.background_warning_text);
         }
-
-        Intent bgService = new Intent(getApplicationContext(), WeatherService.class);
-        startService(bgService);
-
-        IntentFilter intentFilter = new IntentFilter(WeatherService.WEATHER_UPDATE);
-        registerReceiver(receiver, intentFilter);
 
         //Handle interaction with fab button
         FloatingActionButton myFab = (FloatingActionButton)  this.findViewById(R.id.myFAB);
@@ -90,10 +80,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent bgService = new Intent(getApplicationContext(), WeatherService.class);
+        startService(bgService);
+
+        IntentFilter intentFilter = new IntentFilter(WeatherService.WEATHER_UPDATE);
+        registerReceiver(receiver, intentFilter);
+
+    }
+
+    @Override
+        protected void onStop() {
+        super.onStop();
+        unregisterReceiver(receiver);
     }
 }

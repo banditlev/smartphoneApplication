@@ -10,6 +10,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,7 @@ import java.util.List;
 public class BrowseActivity extends AppCompatActivity {
 
     public BrowseService mService;
-    public boolean mBound;
+    public boolean mBound = false;
     private ListView listview;
     private RelativeLayout progress;
     private ProgressBar progressBar;
@@ -53,23 +54,14 @@ public class BrowseActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             if(intent.getAction().compareTo(mService.UPDATE_IS_COMMING) == 0){
                 updateUI();
-
             }
         }
     };
-
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
-
-        locations = null;
 
         progressBar = (ProgressBar) findViewById(R.id.browse_progressbar);
         progressBar.setIndeterminate(true);
@@ -78,22 +70,28 @@ public class BrowseActivity extends AppCompatActivity {
         progress = (RelativeLayout) findViewById(R.id.browse_progressbar_layout);
         listview = (ListView) findViewById(R.id.browse_listview);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         IntentFilter filter = new IntentFilter(mService.UPDATE_IS_COMMING);
         registerReceiver(mReceiver, filter);
 
         Intent intent = new Intent(this, BrowseService.class);
         bindService(intent, con, Context.BIND_AUTO_CREATE);
-
-
     }
 
-    private void updateUI() {
-        locations = mService.getLocations();
-        Collections.sort(locations, WindComparator);
-        browserAdapter = new BrowseListAdapter(this, R.layout.activity_browse_listview_element, locations);
-        listview.setAdapter(browserAdapter);
-        progress.setVisibility(View.INVISIBLE);
-        listview.setVisibility(View.VISIBLE);
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (mBound) {
+            unbindService(con);
+            unregisterReceiver(mReceiver);
+            mBound = false;
+        }
     }
 
     @Override
@@ -156,6 +154,15 @@ public class BrowseActivity extends AppCompatActivity {
             }
         }
     };
+
+    private void updateUI() {
+        locations = mService.getLocations();
+        Collections.sort(locations, WindComparator);
+        browserAdapter = new BrowseListAdapter(this, R.layout.activity_browse_listview_element, locations);
+        listview.setAdapter(browserAdapter);
+        progress.setVisibility(View.INVISIBLE);
+        listview.setVisibility(View.VISIBLE);
+    }
 
     public static Comparator<SurfLocation> NameComparator = new Comparator<SurfLocation>() {
 
