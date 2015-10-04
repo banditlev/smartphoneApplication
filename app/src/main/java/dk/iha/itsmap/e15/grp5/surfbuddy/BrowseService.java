@@ -1,4 +1,4 @@
-package dk.lalan.surfbuddy;
+package dk.iha.itsmap.e15.grp5.surfbuddy;
 
 import android.app.Service;
 import android.content.Context;
@@ -29,8 +29,8 @@ import java.util.List;
 public class BrowseService extends Service {
 
 
-    public static final String UPDATE_IS_COMMING = "dk.lalan.surfbuddy.browseservice.UPDATE_IS_COMMING";
-    public static final String UPDATE_PROGRESS = "dk.lalan.surfbuddy.browseservice.UPDATE_PROGRESS";
+    public static final String UPDATE_IS_COMMING = "dk.iha.itsmap.e15.grp5.surfbuddy.browseservice.UPDATE_IS_COMMING";
+    public static final String UPDATE_PROGRESS = "dk.iha.itsmap.e15.grp5.surfbuddy.browseservice.UPDATE_PROGRESS";
     private final IBinder iBinder = new BrowseBinder();
     private Thread servicecallthread;
     private List<SurfLocation> locations;
@@ -53,8 +53,8 @@ public class BrowseService extends Service {
 
         if(myLocation == null){
             myLocation = new Location("");
-            myLocation.setLatitude(0.0);
-            myLocation.setLongitude(0.0);
+            myLocation.setLatitude(56.171981);
+            myLocation.setLongitude(10.190967);
         }
 
         return iBinder;

@@ -1,10 +1,12 @@
-package dk.lalan.surfbuddy;
+package dk.iha.itsmap.e15.grp5.surfbuddy;
 
 import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+
 
 /**
  * Created by lundtoft on 02/10/15.

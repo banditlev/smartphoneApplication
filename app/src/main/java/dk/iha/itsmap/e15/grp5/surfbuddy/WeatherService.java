@@ -1,8 +1,7 @@
-package dk.lalan.surfbuddy;
+package dk.iha.itsmap.e15.grp5.surfbuddy;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -21,7 +20,7 @@ public class WeatherService extends IntentService {
     private Thread servicecallthread;
     private Database db;
     private Intent broadcastIntent;
-    public static final String WEATHER_UPDATE = "dk.lalan.surfbuddy.weatherupdate";
+    public static final String WEATHER_UPDATE = "dk.iha.itsmap.e15.grp5.surfbuddy.weatherupdate";
 
     public WeatherService() {
         super("WeatherService");

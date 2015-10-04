@@ -1,4 +1,4 @@
-package dk.lalan.surfbuddy;
+package dk.iha.itsmap.e15.grp5.surfbuddy;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

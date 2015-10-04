@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="dk.lalan.surfbuddy.LocationInformationActivity">
+    tools:context="dk.iha.itsmap.e15.grp5.surfbuddy.LocationInformationActivity">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout"
@@ -15,7 +15,7 @@
         app:layout_scrollFlags="scroll|enterAlways">
         </android.support.design.widget.TabLayout>
 
-    <dk.lalan.surfbuddy.NonSwipeableViewPager
+    <dk.iha.itsmap.e15.grp5.surfbuddy.NonSwipeableViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

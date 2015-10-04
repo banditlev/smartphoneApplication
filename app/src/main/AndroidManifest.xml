@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dk.lalan.surfbuddy" >
+    package="dk.iha.itsmap.e15.grp5.surfbuddy" >
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="dk.iha.itsmap.e15.grp5.surfbuddy.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="WeatherService.WEATHER_UPDATE" />
@@ -27,9 +27,9 @@
 
         </activity>
         <activity
-            android:name=".BrowseActivity"
+            android:name="dk.iha.itsmap.e15.grp5.surfbuddy.BrowseActivity"
             android:label="@string/title_activity_browse"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="dk.iha.itsmap.e15.grp5.surfbuddy.MainActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="BrowseService.UPDATE_IS_COMMING" />
@@ -40,16 +40,16 @@
         </activity>
 
         <service
-            android:name=".WeatherService"
+            android:name="dk.iha.itsmap.e15.grp5.surfbuddy.WeatherService"
             android:exported="false" />
         <service
-            android:name=".BrowseService"
+            android:name="dk.iha.itsmap.e15.grp5.surfbuddy.BrowseService"
             android:exported="false" />
 
         <activity
-            android:name=".LocationInformationActivity"
+            android:name="dk.iha.itsmap.e15.grp5.surfbuddy.LocationInformationActivity"
             android:label="@string/title_activity_location_information"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="dk.iha.itsmap.e15.grp5.surfbuddy.MainActivity">
 
         </activity>
     </application>

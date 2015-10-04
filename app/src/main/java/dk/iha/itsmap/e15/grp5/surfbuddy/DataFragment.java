@@ -1,4 +1,4 @@
-package dk.lalan.surfbuddy;
+package dk.iha.itsmap.e15.grp5.surfbuddy;
 
 
 import android.content.Context;
@@ -14,6 +14,8 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+
 
 
 /**
@@ -62,8 +64,8 @@ public class DataFragment extends Fragment {
 
             if(myLocation == null){
                 myLocation = new Location("");
-                myLocation.setLatitude(0.0);
-                myLocation.setLongitude(0.0);
+                myLocation.setLatitude(56.171981);
+                myLocation.setLongitude(10.190967);
             }
 
             double dist = myLocation.distanceTo(surfLocation) / 1000;

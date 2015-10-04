@@ -1,14 +1,11 @@
-package dk.lalan.surfbuddy;
+package dk.iha.itsmap.e15.grp5.surfbuddy;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
@@ -16,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+
+
 
 /**
  * Created by lalan on 02/10/15.

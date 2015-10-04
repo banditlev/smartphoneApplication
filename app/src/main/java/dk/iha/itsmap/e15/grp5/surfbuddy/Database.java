@@ -1,4 +1,4 @@
-package dk.lalan.surfbuddy;
+package dk.iha.itsmap.e15.grp5.surfbuddy;
 
 import android.content.ContentValues;
 import android.content.Context;

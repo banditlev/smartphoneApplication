@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="dk.lalan.surfbuddy.BrowseActivity">
+    tools:context="dk.iha.itsmap.e15.grp5.surfbuddy.BrowseActivity">
 
     <item android:id="@+id/browse_action_alphabetic" android:title="@string/browse_action_alphabetic"
         android:orderInCategory="100" app:showAsAction="never" />

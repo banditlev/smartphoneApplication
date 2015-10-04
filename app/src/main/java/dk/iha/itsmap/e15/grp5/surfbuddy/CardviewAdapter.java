@@ -1,13 +1,10 @@
-package dk.lalan.surfbuddy;
+package dk.iha.itsmap.e15.grp5.surfbuddy;
 
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Matrix;
-import android.graphics.RectF;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.view.View;
 import android.view.LayoutInflater;
@@ -15,10 +12,11 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 import java.util.Locale;
+
+
 
 /**
  * Created by banditlev on 02/10/15.

@@ -1,6 +1,5 @@
-package dk.lalan.surfbuddy;
+package dk.iha.itsmap.e15.grp5.surfbuddy;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -24,6 +23,8 @@ import android.widget.Toast;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+
 
 public class BrowseActivity extends AppCompatActivity {
 

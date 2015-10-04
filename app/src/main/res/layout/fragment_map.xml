@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="dk.lalan.surfbuddy.MapFragment">
+    android:layout_height="match_parent" tools:context="dk.iha.itsmap.e15.grp5.surfbuddy.MapFragment">
 
     <org.osmdroid.views.MapView
         android:id="@+id/mapview"
