@@ -7,11 +7,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,20 +37,39 @@ public class LocationInformationActivity extends AppCompatActivity {
         //Inspired by: http://www.androidrey.com/android-design-support-library-tablayout/
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        getSupportActionBar().setElevation(0);
-        tabLayout.setElevation(12);
         tabLayout.setTabTextColors(getResources().getColor(R.color.tabbar_menu_dim), Color.WHITE);
 
         setTitle(surfLocation.getName());
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        if (viewPager != null) {
-            setupViewPager(viewPager);
+        if(findViewById(R.id.large_mapview) != null){
+            ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+            if (viewPager != null) {
+                setupViewPagerTablet(viewPager);
+            }
+            tabLayout.setupWithViewPager(viewPager);
+
+            FrameLayout largeMapView = (FrameLayout) findViewById(R.id.large_mapview);
+            Fragment f = new MapFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.large_mapview, f).commit();
+
+            getSupportActionBar().setElevation(12);
+
+        }else{
+            ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+            if (viewPager != null) {
+                setupViewPagerPhone(viewPager);
+            }
+            tabLayout.setupWithViewPager(viewPager);
+
+            getSupportActionBar().setElevation(0);
         }
 
-        tabLayout.setupWithViewPager(viewPager);
+
+
 
         fab = (FloatingActionButton) findViewById(R.id.favBtn);
+
 
         db = new Database(getApplicationContext());
 
@@ -80,11 +101,17 @@ public class LocationInformationActivity extends AppCompatActivity {
     }
 
     //Inspiration from: https://github.com/chrisbanes/cheesesquare
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPagerPhone(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new DataFragment(), "Data");
         adapter.addFragment(new InformationFragment(), "Information");
         adapter.addFragment(new MapFragment(), "Map");
+        viewPager.setAdapter(adapter);
+    }
+    private void setupViewPagerTablet(ViewPager viewPager) {
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(new DataFragment(), "Data");
+        adapter.addFragment(new InformationFragment(), "Information");
         viewPager.setAdapter(adapter);
     }
 
