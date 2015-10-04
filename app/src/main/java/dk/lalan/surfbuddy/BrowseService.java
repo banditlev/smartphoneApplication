@@ -3,6 +3,7 @@ package dk.lalan.surfbuddy;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Binder;
@@ -34,6 +35,8 @@ public class BrowseService extends Service {
     private Thread servicecallthread;
     private List<SurfLocation> locations;
     private Location myLocation, surfLocation;
+    private String provider;
+    private LocationManager locationManager;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -41,9 +44,19 @@ public class BrowseService extends Service {
         //LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         //Log.i("***", "LOCATION - long: " + myLocation.getLongitude() + " lat: " + myLocation.getLatitude());
-        myLocation = new Location("");
-        myLocation.setLatitude(56.15);
-        myLocation.setLongitude(10.20);
+
+        //Inspired from: http://www.vogella.com/tutorials/AndroidDrawables/article.html
+        locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, false);
+        myLocation = locationManager.getLastKnownLocation(provider);
+
+        if(myLocation == null){
+            myLocation = new Location("");
+            myLocation.setLatitude(0.0);
+            myLocation.setLongitude(0.0);
+        }
+
         return iBinder;
     }
 

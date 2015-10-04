@@ -56,6 +56,7 @@ public class MapFragment extends Fragment implements LocationListener {
         Criteria criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, false);
         location = locationManager.getLastKnownLocation(provider);
+        locationManager.requestLocationUpdates(provider, 400, 1, this);
 
         if (location != null) {
             onLocationChanged(location);
@@ -97,6 +98,7 @@ public class MapFragment extends Fragment implements LocationListener {
     public void onProviderDisabled(String provider) {
 
     }
+
 
     /**
      * Adding a marker to the map
