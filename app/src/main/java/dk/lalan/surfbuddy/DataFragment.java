@@ -62,13 +62,17 @@ public class DataFragment extends Fragment {
             windSurfDirection.setImageDrawable(this.getResources().getDrawable(R.drawable.arrow_red));
         }
 
-        RotateAnimation animArrow = new RotateAnimation(0, sf.getWindDir(), 80, 80);
+        float pivotX = windSurfDirection.getLayoutParams().width/2;
+        float pivotY = windSurfDirection.getLayoutParams().height/2;
+        RotateAnimation animArrow = new RotateAnimation(0, sf.getWindDir(), pivotX, pivotY);
         animArrow.setInterpolator(new LinearInterpolator());
         animArrow.setFillAfter(true);
         animArrow.setDuration(2000);
         windSurfDirection.startAnimation(animArrow);
 
-        RotateAnimation animCircle = new RotateAnimation(0, sf.getSurfDir(), 200, 200);
+        pivotX = surfDirection.getLayoutParams().width/2;
+        pivotY = surfDirection.getLayoutParams().height/2;
+        RotateAnimation animCircle = new RotateAnimation(0, sf.getSurfDir(), pivotX, pivotY);
         animCircle.setInterpolator(new LinearInterpolator());
         animCircle.setFillAfter(true);
         animCircle.setDuration(2000);

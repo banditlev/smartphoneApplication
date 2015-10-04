@@ -110,7 +110,7 @@ public class BrowseService extends Service {
                 sf.setUpdated(date);
 
                 urlConnection.disconnect();
-                //break;
+                break;
             }
             Intent i = new Intent(UPDATE_IS_COMMING);
             sendBroadcast(i);

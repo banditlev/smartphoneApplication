@@ -3,9 +3,12 @@ package dk.lalan.surfbuddy;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
@@ -59,10 +62,13 @@ public class BrowseListAdapter extends ArrayAdapter<SurfLocation> {
             holder.windDirection.setImageDrawable(context.getDrawable(R.drawable.arrow_red));
         }
 
-        RotateAnimation animArrow = new RotateAnimation(0, surfLocation.getWindDir(), 40, 40);
+        float pivotX = holder.windDirection.getLayoutParams().width/2;
+        float pivotY = holder.windDirection.getLayoutParams().height/2;
+
+        RotateAnimation animArrow = new RotateAnimation(0, surfLocation.getWindDir(), pivotX, pivotY);
         animArrow.setInterpolator(new LinearInterpolator());
         animArrow.setFillAfter(true);
-        animArrow.setDuration(1000);
+        animArrow.setDuration(10000);
         holder.windDirection.startAnimation(animArrow);
 
         row.setOnClickListener(new View.OnClickListener() {

@@ -92,10 +92,14 @@ public class SurfLocation {
     }
 
     public Double getWindSpeed() {
-        windSpeed = windSpeed*1.852;
-        windSpeed = windSpeed*100;
-        windSpeed = Math.round(windSpeed);
-        windSpeed = windSpeed / 100;
+        double newWindSpeed = windSpeed*1.852;
+        newWindSpeed = newWindSpeed*100;
+        newWindSpeed = Math.round(newWindSpeed);
+        newWindSpeed = newWindSpeed / 100;
+        return newWindSpeed;
+    }
+
+    public Double getRawWindSpeed() {
         return windSpeed;
     }
 
