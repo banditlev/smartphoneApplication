@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Collections;
@@ -33,6 +34,7 @@ public class BrowseActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ArrayAdapter<SurfLocation> browserAdapter;
     private List<SurfLocation> locations;
+    private TextView progressText;
     private ServiceConnection con = new ServiceConnection() {
 
         @Override
@@ -54,6 +56,9 @@ public class BrowseActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             if(intent.getAction().compareTo(mService.UPDATE_IS_COMMING) == 0){
                 updateUI();
+            } else if(intent.getAction().compareTo(mService.UPDATE_PROGRESS) == 0){
+                Log.e("prog", ""+intent.getIntExtra("progress", 0));
+                progressText.setText(""+intent.getIntExtra("progress", 0)+"%");
             }
         }
     };
@@ -62,6 +67,7 @@ public class BrowseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
+        progressText = (TextView) findViewById(R.id.browse_progress_text);
 
         progressBar = (ProgressBar) findViewById(R.id.browse_progressbar);
         progressBar.setIndeterminate(true);
@@ -78,6 +84,8 @@ public class BrowseActivity extends AppCompatActivity {
 
         IntentFilter filter = new IntentFilter(mService.UPDATE_IS_COMMING);
         registerReceiver(mReceiver, filter);
+        IntentFilter filter2 = new IntentFilter(mService.UPDATE_PROGRESS);
+        registerReceiver(mReceiver, filter2);
 
         Intent intent = new Intent(this, BrowseService.class);
         bindService(intent, con, Context.BIND_AUTO_CREATE);

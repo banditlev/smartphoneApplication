@@ -34,6 +34,9 @@
             <intent-filter>
                 <action android:name="BrowseService.UPDATE_IS_COMMING" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="BrowseService.UPDATE_PROGRESS" />
+            </intent-filter>
         </activity>
 
         <service

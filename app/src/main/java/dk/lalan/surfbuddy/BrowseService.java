@@ -29,6 +29,7 @@ public class BrowseService extends Service {
 
 
     public static final String UPDATE_IS_COMMING = "dk.lalan.surfbuddy.browseservice.UPDATE_IS_COMMING";
+    public static final String UPDATE_PROGRESS = "dk.lalan.surfbuddy.browseservice.UPDATE_PROGRESS";
     private final IBinder iBinder = new BrowseBinder();
     private Thread servicecallthread;
     private List<SurfLocation> locations;
@@ -65,6 +66,7 @@ public class BrowseService extends Service {
     public void fetchWeather(){
         try {
 
+            int count = 0;
             for(SurfLocation sf : locations) {
 
                 URL url = new URL("http://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + sf.getlatitude() + "&lon=" + sf.getLongitude());
@@ -109,6 +111,11 @@ public class BrowseService extends Service {
                 String date = new SimpleDateFormat("EEE, HH:mm").format(new Date());
                 sf.setUpdated(date);
 
+                Intent broadcastIntent = new Intent(UPDATE_PROGRESS);
+                int progress = count*100/locations.size();
+                broadcastIntent.putExtra("progress", progress);
+                sendBroadcast(broadcastIntent);
+                count++;
                 urlConnection.disconnect();
                 //break;
             }

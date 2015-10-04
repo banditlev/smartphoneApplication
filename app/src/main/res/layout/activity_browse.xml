@@ -21,10 +21,23 @@
             android:layout_centerHorizontal="true"/>
 
         <TextView
+            android:id="@+id/browse_progress_drug"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/browse_progressbar"
-            android:text="Getting your drug.."
+            android:text="Fetching surf locations.."
+            android:layout_centerHorizontal="true"
+            android:textColor="#878787"
+            android:paddingBottom="25dp"/>
+
+        <TextView
+            android:id="@+id/browse_progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/browse_progressbar"
+            android:textSize="35sp"
+            android:text="0%"
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:textColor="#878787"
             android:paddingBottom="25dp"/>
