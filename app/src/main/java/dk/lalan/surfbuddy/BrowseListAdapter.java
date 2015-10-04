@@ -68,7 +68,7 @@ public class BrowseListAdapter extends ArrayAdapter<SurfLocation> {
         RotateAnimation animArrow = new RotateAnimation(0, surfLocation.getWindDir(), pivotX, pivotY);
         animArrow.setInterpolator(new LinearInterpolator());
         animArrow.setFillAfter(true);
-        animArrow.setDuration(10000);
+        animArrow.setDuration(1000);
         holder.windDirection.startAnimation(animArrow);
 
         row.setOnClickListener(new View.OnClickListener() {
