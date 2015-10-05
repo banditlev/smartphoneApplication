@@ -208,12 +208,12 @@ public class BrowseActivity extends AppCompatActivity {
             int sf1Level = sf1.getLevel();
             int sf2Level = sf2.getLevel();
 
-            if(sf1Level == sf1Level){
+            if(sf1Level == sf2Level){
                 return 0;
-            }else if(sf1Level > sf1Level){
-                return -1;
-            }else{
+            }else if(sf1Level > sf2Level){
                 return 1;
+            }else{
+                return -1;
             }
         }
     };
