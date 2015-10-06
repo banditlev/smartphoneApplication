@@ -16,7 +16,7 @@
     <string name="information_fragment_difficulty_label">Difficulty:</string>
     <string name="information_fragment_ideal_direction_label">Ideal Direction:</string>
     <string name="knots">knots</string>
-    <string name="conditions_is">Conditions is:</string>
+    <string name="conditions_is">Conditions is </string>
     <string name="last_updated">Last updated:</string>
     <string name="level_string_novice">Novice</string>
     <string name="level_string_intermediate">Intermediate</string>

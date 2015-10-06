@@ -75,7 +75,7 @@ public class DataFragment extends Fragment {
         }
 
         distance.setText(sf.getDistance() + " km");
-        description.setText(this.getResources().getString(R.string.conditions_is) + sf.getDescribtion());
+        description.setText(this.getResources().getString(R.string.conditions_is) + " " + sf.getDescribtion());
         updated.setText(sf.getUpdated());
 
         if (sf.isSurfable()){
