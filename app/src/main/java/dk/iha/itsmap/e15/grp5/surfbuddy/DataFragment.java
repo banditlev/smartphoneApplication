@@ -86,7 +86,7 @@ public class DataFragment extends Fragment {
 
         float pivotX = windSurfDirection.getLayoutParams().width/2;
         float pivotY = windSurfDirection.getLayoutParams().height/2;
-        RotateAnimation animArrow = new RotateAnimation(0, sf.getWindDir(), pivotX, pivotY);
+        RotateAnimation animArrow = new RotateAnimation(0,  -(360-sf.getWindDir()), pivotX, pivotY);
         animArrow.setInterpolator(new LinearInterpolator());
         animArrow.setFillAfter(true);
         animArrow.setDuration(2000);
