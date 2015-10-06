@@ -70,6 +70,12 @@ public class MapFragment extends Fragment implements LocationListener {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        locationManager.removeUpdates(this);
+    }
+
+    @Override
     public void onLocationChanged(Location loc) {
         if(map != null) {
             items.clear();
