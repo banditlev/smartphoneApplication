@@ -51,6 +51,11 @@ public class MapFragment extends Fragment implements LocationListener {
 
         //Inspired from: http://www.vogella.com/tutorials/AndroidDrawables/article.html
         locationManager = (LocationManager) view.getContext().getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, false);
+        location = locationManager.getLastKnownLocation(provider);
+        locationManager.requestLocationUpdates(provider, 400, 1, this);
+
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1, this);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 1, this);
 
