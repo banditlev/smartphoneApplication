@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,10 +51,8 @@ public class MapFragment extends Fragment implements LocationListener {
 
         //Inspired from: http://www.vogella.com/tutorials/AndroidDrawables/article.html
         locationManager = (LocationManager) view.getContext().getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, false);
-        location = locationManager.getLastKnownLocation(provider);
-        locationManager.requestLocationUpdates(provider, 400, 1, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1, this);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 1, this);
 
         if (location != null) {
             onLocationChanged(location);
@@ -76,10 +75,18 @@ public class MapFragment extends Fragment implements LocationListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1, this);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 1, this);
+    }
+
+    @Override
     public void onLocationChanged(Location loc) {
+        Log.e("GPS**", "Location Change " + loc.getLongitude());
         if(map != null) {
             items.clear();
-
+            map.getOverlayManager().clear();
             GeoPoint gpsPoint = new GeoPoint(loc.getLatitude(), loc.getLongitude());
             GeoPoint surfPoint = new GeoPoint(surfLocation.getlatitude(), surfLocation.getLongitude());
             addMarker(gpsPoint, this.getResources().getDrawable(R.drawable.gps), map);

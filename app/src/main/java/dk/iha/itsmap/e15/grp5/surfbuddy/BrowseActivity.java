@@ -58,7 +58,6 @@ public class BrowseActivity extends AppCompatActivity {
             if(intent.getAction().compareTo(mService.UPDATE_IS_COMMING) == 0){
                 updateUI();
             } else if(intent.getAction().compareTo(mService.UPDATE_PROGRESS) == 0){
-                Log.e("prog", ""+intent.getIntExtra("progress", 0));
                 progressText.setText(""+intent.getIntExtra("progress", 0)+"%");
             }
         }

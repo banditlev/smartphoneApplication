@@ -115,8 +115,14 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
         float ringHeight = viewHolder.favoriteWindDirectionRing.getLayoutParams().height / 2;
         float ringArrow = viewHolder.favoriteWindDirectionRing.getLayoutParams().width / 2;
 
-        RotateAnimation animRing = new RotateAnimation(0, location.getSurfDir(), ringHeight, ringArrow);
-        RotateAnimation animArrow = new RotateAnimation(0, -(360-location.getWindDir()), arrowHeight,  arrowWidth);
+        RotateAnimation animRing = new RotateAnimation(0,
+                location.getSurfDir(),
+                ringHeight,
+                ringArrow);
+        RotateAnimation animArrow = new RotateAnimation(0,
+                -(360-location.getWindDir()),
+                arrowHeight,
+                arrowWidth);
 
         animRing.setInterpolator(new LinearInterpolator());
         animArrow.setInterpolator(new LinearInterpolator());
