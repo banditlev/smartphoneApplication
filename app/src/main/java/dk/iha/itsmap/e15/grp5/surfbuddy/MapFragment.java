@@ -56,8 +56,8 @@ public class MapFragment extends Fragment implements LocationListener {
         location = locationManager.getLastKnownLocation(provider);
         locationManager.requestLocationUpdates(provider, 400, 1, this);
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1, this);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 1, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, this);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, this);
 
         if (location != null) {
             onLocationChanged(location);

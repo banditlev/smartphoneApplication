@@ -18,8 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
+/**
+ * Created by banditlev on 02/10/15.
+ */
 //Inspired by: http://treyrobinson.net/blog/android-l-tutorials-part-3-recyclerview-and-cardview/
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView warningText;
 
     private Database db;
+
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
         //Inspiration: http://www.vogella.com/tutorials/AndroidServices/article.html
