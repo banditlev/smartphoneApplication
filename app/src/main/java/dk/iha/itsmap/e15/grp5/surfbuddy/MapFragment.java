@@ -57,7 +57,11 @@ public class MapFragment extends Fragment implements LocationListener {
         locationManager.requestLocationUpdates(provider, 400, 1, this);
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, this);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, this);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, this);
+        }catch (Exception e){
+            Log.d("***", "No NetworkProvider");
+        }
 
         if (location != null) {
             onLocationChanged(location);
@@ -83,7 +87,11 @@ public class MapFragment extends Fragment implements LocationListener {
     public void onResume() {
         super.onResume();
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1, this);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 1, this);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, this);
+        }catch (Exception e){
+            Log.d("***", "No NetworkProvider");
+        }
     }
 
     @Override
