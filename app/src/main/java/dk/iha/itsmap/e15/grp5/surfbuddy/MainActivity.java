@@ -97,14 +97,19 @@ public class MainActivity extends AppCompatActivity {
         Intent bgService = new Intent(getApplicationContext(), WeatherService.class);
         startService(bgService);
 
-        IntentFilter intentFilter = new IntentFilter(WeatherService.WEATHER_UPDATE);
-        registerReceiver(receiver, intentFilter);
 
     }
 
     @Override
-        protected void onStop() {
-        super.onStop();
+    protected void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter(WeatherService.WEATHER_UPDATE);
+        registerReceiver(receiver, intentFilter);
+    }
+
+    @Override
+        protected void onPause() {
+        super.onPause();
         unregisterReceiver(receiver);
     }
 }

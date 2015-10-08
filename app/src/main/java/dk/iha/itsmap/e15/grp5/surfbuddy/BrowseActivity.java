@@ -82,11 +82,6 @@ public class BrowseActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        IntentFilter filter = new IntentFilter(mService.UPDATE_IS_COMMING);
-        registerReceiver(mReceiver, filter);
-        IntentFilter filter2 = new IntentFilter(mService.UPDATE_PROGRESS);
-        registerReceiver(mReceiver, filter2);
-
         Intent intent = new Intent(this, BrowseService.class);
         bindService(intent, con, Context.BIND_AUTO_CREATE);
     }
@@ -94,12 +89,32 @@ public class BrowseActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
         if (mBound) {
             unbindService(con);
-            unregisterReceiver(mReceiver);
             mBound = false;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter filter = new IntentFilter(mService.UPDATE_IS_COMMING);
+        registerReceiver(mReceiver, filter);
+        IntentFilter filter2 = new IntentFilter(mService.UPDATE_PROGRESS);
+        registerReceiver(mReceiver, filter2);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mService.kill();
+        unregisterReceiver(mReceiver);
+        if (mBound) {
+            unbindService(con);
+            mBound = false;
+        }
+
     }
 
     @Override

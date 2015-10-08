@@ -37,6 +37,7 @@ public class BrowseService extends Service {
     private Location myLocation, surfLocation;
     private String provider;
     private LocationManager locationManager;
+    private boolean alive;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -56,6 +57,8 @@ public class BrowseService extends Service {
             myLocation.setLatitude(56.171981);
             myLocation.setLongitude(10.190967);
         }
+
+        alive = true;
 
         return iBinder;
     }
@@ -81,66 +84,71 @@ public class BrowseService extends Service {
 
             int count = 0;
             for(SurfLocation sf : locations) {
-                StringBuilder response = new StringBuilder();
-                try{
-                    URL url = new URL("http://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + sf.getlatitude() + "&lon=" + sf.getLongitude());
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                if (alive) {
+                    StringBuilder response = new StringBuilder();
 
-                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                    try {
+                        URL url = new URL("http://api.openweathermap.org/data/2.5/weather?units=metric" +
+                                "&lat=" + sf.getlatitude() + "&lon=" + sf.getLongitude());
+                        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
+                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            response.append(line);
+                        }
+
+                        urlConnection.disconnect();
+                    } catch (Exception e) {
+                        response.append("{\"coord\":{\"lon\":10.17,\"lat\":56.16},\"weather\":[{\"id\":500,\"main\":\"Rain\",\"description\":\"light rain\",\"icon\":\"10d\"}],\"base\":\"stations\",\"main\":{\"temp\":13.53,\"pressure\":1015,\"humidity\":71,\"temp_min\":13,\"temp_max\":14},\"wind\":{\"speed\":9.8,\"deg\":90,\"gust\":14.9},\"rain\":{\"3h\":0.2},\"clouds\":{\"all\":92},\"dt\":1444119960,\"sys\":{\"type\":1,\"id\":5241,\"message\":0.0121,\"country\":\"DK\",\"sunrise\":1444109537,\"sunset\":1444149690},\"id\":2624647,\"name\":\"Århus Kommune\",\"cod\":200}");
                     }
 
-                    urlConnection.disconnect();
-                }catch (Exception e){
-                    response.append("{\"coord\":{\"lon\":10.17,\"lat\":56.16},\"weather\":[{\"id\":500,\"main\":\"Rain\",\"description\":\"light rain\",\"icon\":\"10d\"}],\"base\":\"stations\",\"main\":{\"temp\":13.53,\"pressure\":1015,\"humidity\":71,\"temp_min\":13,\"temp_max\":14},\"wind\":{\"speed\":9.8,\"deg\":90,\"gust\":14.9},\"rain\":{\"3h\":0.2},\"clouds\":{\"all\":92},\"dt\":1444119960,\"sys\":{\"type\":1,\"id\":5241,\"message\":0.0121,\"country\":\"DK\",\"sunrise\":1444109537,\"sunset\":1444149690},\"id\":2624647,\"name\":\"Århus Kommune\",\"cod\":200}");
+
+                    Log.i("****", response.toString());
+
+                    JSONObject responseObj = new JSONObject(response.toString());
+
+                    int direction;
+                    try {
+                        direction = (int) responseObj.getJSONObject("wind").getDouble("deg");
+                    } catch (JSONException e) {
+                        direction = 0;
+                    }
+
+                    double wind = responseObj.getJSONObject("wind").getDouble("speed");
+                    double temp = responseObj.getJSONObject("main").getDouble("temp");
+                    String desc = responseObj.getJSONArray("weather").getJSONObject(0).getString("description");
+
+                    sf.setWindDir(direction);
+                    sf.setWindSpeed(wind);
+                    sf.setTemperatur(temp);
+                    sf.setDescribtion(desc);
+
+                    surfLocation = new Location("");
+                    surfLocation.setLongitude(sf.getLongitude());
+                    surfLocation.setLatitude(sf.getlatitude());
+                    double dist = myLocation.distanceTo(surfLocation) / 1000;
+                    dist = Math.round(dist * 100);
+                    dist = dist / 100;
+                    sf.setDistance(dist);
+
+                    String date = new SimpleDateFormat("EEE, HH:mm").format(new Date());
+                    sf.setUpdated(date);
+
+                    Intent broadcastIntent = new Intent(UPDATE_PROGRESS);
+                    int progress = count * 100 / locations.size();
+                    broadcastIntent.putExtra("progress", progress);
+                    sendBroadcast(broadcastIntent);
+                    count++;
+
+                    //break;
                 }
-
-
-                Log.i("****", response.toString());
-
-                JSONObject responseObj = new JSONObject(response.toString());
-
-                int direction;
-                try{
-                    direction = (int) responseObj.getJSONObject("wind").getDouble("deg");
-                }catch (JSONException e){
-                    direction = 0;
-                }
-
-                double wind = responseObj.getJSONObject("wind").getDouble("speed");
-                double temp = responseObj.getJSONObject("main").getDouble("temp");
-                String desc = responseObj.getJSONArray("weather").getJSONObject(0).getString("description");
-
-                sf.setWindDir(direction);
-                sf.setWindSpeed(wind);
-                sf.setTemperatur(temp);
-                sf.setDescribtion(desc);
-
-                surfLocation = new Location("");
-                surfLocation.setLongitude(sf.getLongitude());
-                surfLocation.setLatitude(sf.getlatitude());
-                double dist = myLocation.distanceTo(surfLocation) / 1000;
-                dist = Math.round(dist * 100);
-                dist = dist / 100;
-                sf.setDistance(dist);
-
-                String date = new SimpleDateFormat("EEE, HH:mm").format(new Date());
-                sf.setUpdated(date);
-
-                Intent broadcastIntent = new Intent(UPDATE_PROGRESS);
-                int progress = count*100/locations.size();
-                broadcastIntent.putExtra("progress", progress);
-                sendBroadcast(broadcastIntent);
-                count++;
-
-                //break;
             }
-            Intent i = new Intent(UPDATE_IS_COMMING);
-            sendBroadcast(i);
+                Intent i = new Intent(UPDATE_IS_COMMING);
+                sendBroadcast(i);
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,9 +159,14 @@ public class BrowseService extends Service {
         return locations;
     }
 
+    public void kill(){
+        alive = false;
+    }
+
     public class BrowseBinder extends Binder {
         BrowseService getService(){
             return BrowseService.this;
         }
     }
+
 }
