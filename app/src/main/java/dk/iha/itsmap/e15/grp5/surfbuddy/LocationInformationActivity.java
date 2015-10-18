@@ -67,7 +67,6 @@ public class LocationInformationActivity extends AppCompatActivity {
 
 
 
-
         fab = (FloatingActionButton) findViewById(R.id.favBtn);
 
 

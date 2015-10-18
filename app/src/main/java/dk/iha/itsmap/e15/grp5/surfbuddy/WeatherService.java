@@ -51,7 +51,7 @@ public class WeatherService extends IntentService {
 
             for(SurfLocation sf : db.getAllLocations()) {
 
-                URL url = new URL("http://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + sf.getlatitude() + "&lon=" + sf.getLongitude());
+                URL url = new URL("http://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + sf.getlatitude() + "&lon=" + sf.getLongitude() + "&appid=aff74df8c5738dcbd2d8c3864f9ae06f");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());

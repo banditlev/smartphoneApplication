@@ -21,6 +21,7 @@ public class InformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information, container, false);
         surfLocation = ((LocationInformationActivity) getActivity()).getSurfLocation();
+
         TextView informationText = (TextView) view.findViewById(R.id.fragment_information_text);
         TextView difficultyLevel = (TextView) view.findViewById(R.id.difficulty_text);
         TextView idealDirection = (TextView) view.findViewById(R.id.ideal_direction);
